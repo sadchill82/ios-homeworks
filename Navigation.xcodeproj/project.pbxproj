@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */; };
+		CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */; };
 		CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00882C6A9F980000C76C /* AppDelegate.swift */; };
 		CEDD008B2C6A9F980000C76C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD008A2C6A9F980000C76C /* SceneDelegate.swift */; };
 		CEDD008D2C6A9F980000C76C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD008C2C6A9F980000C76C /* ViewController.swift */; };
 		CEDD00922C6A9F9A0000C76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDD00912C6A9F9A0000C76C /* Assets.xcassets */; };
 		CEDD00952C6A9F9A0000C76C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEDD00942C6A9F9A0000C76C /* Base */; };
 		CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD009C2C6AA5680000C76C /* FeedViewController.swift */; };
-		CEDD009F2C6AA5780000C76C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD009E2C6AA5780000C76C /* ProfileViewController.swift */; };
 		CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A02C6AA5880000C76C /* PostViewController.swift */; };
 		CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A22C6AA5940000C76C /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CEDD00852C6A9F980000C76C /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDD00882C6A9F980000C76C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEDD008A2C6A9F980000C76C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +30,6 @@
 		CEDD00942C6A9F9A0000C76C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDD00962C6A9F9A0000C76C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEDD009C2C6AA5680000C76C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		CEDD009E2C6AA5780000C76C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CEDD00A02C6AA5880000C76C /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CEDD00A22C6AA5940000C76C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE17684E2C6E918100A8C845 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */,
+				CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CEDD007C2C6A9F980000C76C = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +73,7 @@
 		CEDD00872C6A9F980000C76C /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				CE17684E2C6E918100A8C845 /* Profile */,
 				CEDD00882C6A9F980000C76C /* AppDelegate.swift */,
 				CEDD008A2C6A9F980000C76C /* SceneDelegate.swift */,
 				CEDD008C2C6A9F980000C76C /* ViewController.swift */,
@@ -69,7 +81,6 @@
 				CEDD00932C6A9F9A0000C76C /* LaunchScreen.storyboard */,
 				CEDD00962C6A9F9A0000C76C /* Info.plist */,
 				CEDD009C2C6AA5680000C76C /* FeedViewController.swift */,
-				CEDD009E2C6AA5780000C76C /* ProfileViewController.swift */,
 				CEDD00A02C6AA5880000C76C /* PostViewController.swift */,
 				CEDD00A22C6AA5940000C76C /* InfoViewController.swift */,
 			);
@@ -150,9 +161,10 @@
 				CEDD008D2C6A9F980000C76C /* ViewController.swift in Sources */,
 				CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */,
 				CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */,
-				CEDD009F2C6AA5780000C76C /* ProfileViewController.swift in Sources */,
 				CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */,
+				CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */,
 				CEDD008B2C6A9F980000C76C /* SceneDelegate.swift in Sources */,
+				CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
