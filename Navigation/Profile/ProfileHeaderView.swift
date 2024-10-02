@@ -42,8 +42,13 @@ class ProfileHeaderView: UIView {
     private let statusTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "Enter your status"
+        textField.textColor = .darkGray
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 8
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.attributedPlaceholder = NSAttributedString.init(string: "Ready to help", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+
         return textField
     }()
     
@@ -92,28 +97,32 @@ class ProfileHeaderView: UIView {
             // avatarImageView constraints
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 128),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 128),
             
             // fullNameLabel constraints
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 156),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 28),
+
+            // statusTextField constraints
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16),
+            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusTextField.heightAnchor.constraint(equalToConstant: 32),
             
             // statusLabel constraints
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 4),
-            
-            // statusTextField constraints
-            statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            statusTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+            statusLabel.heightAnchor.constraint(equalTo: fullNameLabel.heightAnchor),
+
             // setStatusButton constraints
             setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 48),
         ])
     }
 }
