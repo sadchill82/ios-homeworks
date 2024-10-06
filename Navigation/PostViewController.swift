@@ -7,10 +7,6 @@
 
 import UIKit
 
-struct Post {
-    let title: String
-}
-
 class PostViewController: UIViewController {
     
     var post: Post?
@@ -18,7 +14,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
-        title = post?.title
+        title = post?.author
         
         let infoButton = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showInfo))
         navigationItem.rightBarButtonItem = infoButton
