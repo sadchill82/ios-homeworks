@@ -17,6 +17,7 @@
 		CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD009C2C6AA5680000C76C /* FeedViewController.swift */; };
 		CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A02C6AA5880000C76C /* PostViewController.swift */; };
 		CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A22C6AA5940000C76C /* InfoViewController.swift */; };
+		CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF298F82CACA5A00072E47F /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CEDD009C2C6AA5680000C76C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CEDD00A02C6AA5880000C76C /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CEDD00A22C6AA5940000C76C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CEF298F82CACA5A00072E47F /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 		CE17684E2C6E918100A8C845 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CEF298F82CACA5A00072E47F /* LogInViewController.swift */,
 				CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */,
 				CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */,
 			);
@@ -159,6 +162,7 @@
 			files = (
 				CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */,
 				CEDD008D2C6A9F980000C76C /* ViewController.swift in Sources */,
+				CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */,
 				CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */,
 				CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */,
 				CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */,
