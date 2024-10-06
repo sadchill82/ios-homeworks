@@ -47,7 +47,7 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 8
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.gray.cgColor
-        textField.attributedPlaceholder = NSAttributedString.init(string: "Ready to help", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        textField.placeholder = "Ready to help"
 
         return textField
     }()
