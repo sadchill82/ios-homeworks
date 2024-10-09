@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
     }
     
     @objc func showPost() {
-        let post = Post(title: "Sample Post")
+        let post = posts[0]
         let postViewController = PostViewController()
         postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
