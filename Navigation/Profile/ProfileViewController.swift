@@ -24,13 +24,11 @@ class ProfileViewController: UIViewController {
         setupTableView()
     }
     
-    private let photoImages: [UIImage] = [
-        UIImage(named: "photo1")!,
-        UIImage(named: "photo2")!,
-        UIImage(named: "photo3")!,
-        UIImage(named: "photo4")!
-    ]
-    
+    private let photoImages: [UIImage] = {
+        let images = ["photo1", "photo2", "photo3", "photo4"].compactMap { UIImage(named: $0) }
+        return images
+    }()
+
     private func setupTableView() {
         view.addSubview(tableView)
         
@@ -79,11 +77,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 220
+        return section == 0 ? 220 : 0
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return profileHeaderView
+        return section == 0 ? profileHeaderView : nil
     }
 }
 

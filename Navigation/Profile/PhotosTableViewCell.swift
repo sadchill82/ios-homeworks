@@ -45,38 +45,30 @@ class PhotosTableViewCell: UITableViewCell {
             addSubview(imageView)
         }
 
+        for (index, imageView) in photoImageViews.enumerated() {
+            self.addSubview(imageView)
+            let leadingAnchor = index == 0 ? self.leadingAnchor : photoImageViews[index - 1].trailingAnchor
+//            let trailingConstant: CGFloat = index == 3 ? -16 : 8
+
+            NSLayoutConstraint.activate([
+                imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+                imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                imageView.widthAnchor.constraint(equalToConstant: 80),
+                imageView.heightAnchor.constraint(equalToConstant: 80),
+//                index == 3 ? imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: trailingConstant) : NSLayoutConstraint()
+            ])
+        }
+
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-
-            photoImageViews[0].topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            photoImageViews[0].leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            photoImageViews[0].widthAnchor.constraint(equalToConstant: 80),
-            photoImageViews[0].heightAnchor.constraint(equalToConstant: 80),
-
-            photoImageViews[1].topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            photoImageViews[1].leadingAnchor.constraint(equalTo: photoImageViews[0].trailingAnchor, constant: 8),
-            photoImageViews[1].widthAnchor.constraint(equalToConstant: 80),
-            photoImageViews[1].heightAnchor.constraint(equalToConstant: 80),
-
-            photoImageViews[2].topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            photoImageViews[2].leadingAnchor.constraint(equalTo: photoImageViews[1].trailingAnchor, constant: 8),
-            photoImageViews[2].widthAnchor.constraint(equalToConstant: 80),
-            photoImageViews[2].heightAnchor.constraint(equalToConstant: 80),
-
-            photoImageViews[3].topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            photoImageViews[3].leadingAnchor.constraint(equalTo: photoImageViews[2].trailingAnchor, constant: 8),
-            photoImageViews[3].widthAnchor.constraint(equalToConstant: 80),
-            photoImageViews[3].heightAnchor.constraint(equalToConstant: 80),
-
-            photoImageViews[3].trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            photoImageViews[3].bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            photoImageViews.last!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
 
     func configure(with images: [UIImage]) {
-        for (index, image) in images.enumerated() {
+        for (index, image) in images.enumerated() where index < photoImageViews.count {
             photoImageViews[index].image = image
         }
     }
