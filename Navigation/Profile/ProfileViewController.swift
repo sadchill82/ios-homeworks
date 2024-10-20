@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     private let postCellIdentifier = "PostCell"
     private let photoCellIdentifier = "PhotoCell"
     
-    private let tableView: UITableView = {
+    static let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -30,18 +30,18 @@ class ProfileViewController: UIViewController {
     }()
 
     private func setupTableView() {
-        view.addSubview(tableView)
+        view.addSubview(Self.tableView)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postCellIdentifier)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: photoCellIdentifier)
+        Self.tableView.delegate = self
+        Self.tableView.dataSource = self
+        Self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postCellIdentifier)
+        Self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: photoCellIdentifier)
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            Self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            Self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            Self.tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            Self.tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
 }
