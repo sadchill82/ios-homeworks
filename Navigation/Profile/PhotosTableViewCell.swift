@@ -2,26 +2,14 @@
 //  PhotosTableViewCell.swift
 //  Navigation
 //
-//  Created by Ислам on 07.10.2024.
-//
 
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
-
-    private let photoImageViews: [UIImageView] = {
-        var views = [UIImageView]()
-        for _ in 0..<4 {
-            let imageView = UIImageView()
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            views.append(imageView)
-        }
-        return views
-    }()
-
-    private let titleLabel: UILabel = {
+    
+    // MARK: Visual objects
+    
+    var labelPhotos: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Photos"
@@ -29,47 +17,77 @@ class PhotosTableViewCell: UITableViewCell {
         label.textColor = .black
         return label
     }()
-
+    
+    var arrowImage: UIImageView = {
+        let arrow = UIImageView()
+        arrow.translatesAutoresizingMaskIntoConstraints = false
+        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        return arrow
+    }()
+    
+    var stackViewImage: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        stack.spacing = 8
+        return stack
+    }()
+    
+    func getPreviewImage(index: Int) -> UIImageView {
+        let preview = UIImageView()
+        preview.translatesAutoresizingMaskIntoConstraints = false
+        preview.image = Photos.shared.examples[index]
+        preview.contentMode = .scaleAspectFill
+        preview.layer.cornerRadius = 6
+        preview.clipsToBounds = true
+        return preview
+    }
+    
+    // MARK: - Init section
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupLayout()
+        
+        contentView.addSubviews(labelPhotos, arrowImage, stackViewImage)
+        
+        setupPreviews()
+        setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("lol")
     }
-
-    private func setupLayout() {
-        addSubview(titleLabel)
-        for imageView in photoImageViews {
-            addSubview(imageView)
-        }
-
-        for (index, imageView) in photoImageViews.enumerated() {
-            self.addSubview(imageView)
-            let leadingAnchor = index == 0 ? self.leadingAnchor : photoImageViews[index - 1].trailingAnchor
-//            let trailingConstant: CGFloat = index == 3 ? -16 : 8
-
+    
+    // get 3 preview images
+    private func setupPreviews() {
+        for ind in 0...2 {
+            let image = getPreviewImage(index: ind)
+            stackViewImage.addArrangedSubview(image)
             NSLayoutConstraint.activate([
-                imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-                imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                imageView.widthAnchor.constraint(equalToConstant: 80),
-                imageView.heightAnchor.constraint(equalToConstant: 80),
-//                index == 3 ? imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: trailingConstant) : NSLayoutConstraint()
+                image.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 24) / 4),
+                image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: 0.56),
             ])
         }
-
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            photoImageViews.last!.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
-        ])
     }
-
-    func configure(with images: [UIImage]) {
-        for (index, image) in images.enumerated() where index < photoImageViews.count {
-            photoImageViews[index].image = image
-        }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            labelPhotos.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutConstants.indentTwelve),
+            labelPhotos.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentTwelve),
+            labelPhotos.widthAnchor.constraint(equalToConstant: 80),
+            labelPhotos.heightAnchor.constraint(equalToConstant: 40),
+            
+            arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentTwelve),
+            arrowImage.centerYAnchor.constraint(equalTo: labelPhotos.centerYAnchor),
+            arrowImage.heightAnchor.constraint(equalToConstant: 40),
+            arrowImage.widthAnchor.constraint(equalToConstant: 40),
+            
+            stackViewImage.topAnchor.constraint(equalTo: labelPhotos.bottomAnchor, constant: LayoutConstants.indentTwelve),
+            stackViewImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.indentTwelve),
+            stackViewImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutConstants.indentTwelve),
+            stackViewImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutConstants.indentTwelve),
+        ])
     }
 }

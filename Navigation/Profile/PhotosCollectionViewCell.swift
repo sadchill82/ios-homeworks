@@ -2,41 +2,42 @@
 //  PhotosCollectionViewCell.swift
 //  Navigation
 //
-//  Created by Ислам on 12.10.2024.
-//
 
 import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
-
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
+    
+    var photo: UIImageView = {
+        let photos = UIImageView()
+        photos.translatesAutoresizingMaskIntoConstraints = false
+        return photos
     }()
-
+    
+    // MARK: - Init section
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
+        setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("lol")
     }
-
-    private func setupLayout() {
-        addSubview(imageView)
+    
+    private func setupConstraints() {
+        self.contentView.addSubview(photo)
+        
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            photo.topAnchor.constraint(equalTo: contentView.topAnchor),
+            photo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            photo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            photo.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-
-    func configure(with image: UIImage) {
-        imageView.image = image
+    
+    // MARK: - Run loop
+    
+    public func configCellCollection(photo: UIImage) {
+        self.photo.image = photo
     }
 }
