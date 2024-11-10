@@ -7,6 +7,8 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    var user: User?
+    
     static let headerIdent = "header"
     static let photoIdent = "photo"
     static let postIdent = "post"
@@ -37,6 +39,8 @@ final class ProfileViewController: UIViewController {
         Self.postTableView.delegate = self
         Self.postTableView.refreshControl = UIRefreshControl()
         Self.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        
+        displayUserInfo()
     }
     
     private func setupConstraints() {
@@ -51,6 +55,14 @@ final class ProfileViewController: UIViewController {
     @objc func reloadTableView() {
         Self.postTableView.reloadData()
         Self.postTableView.refreshControl?.endRefreshing()
+    }
+    
+    func displayUserInfo() {
+        let headerView = ProfileHeaderView()
+        guard let user else { return }
+        headerView.avatarImageView.image = user.avatar
+        headerView.fullNameLabel.text = user.fullName
+        headerView.statusLabel.text = user.status
     }
 }
 
