@@ -8,14 +8,5 @@
 import UIKit
 
 class CurrentUserService: UserService {
-    private let currentUser: User
-    
-    init() {
-        let defaultAvatar = UIImage(named: "teo") ?? UIImage()
-        currentUser = User(login: "user123", fullName: "John Doe", avatar: defaultAvatar, status: "Hello, World!")
-    }
-    
-    func fetchUser(login: String) -> User? {
-        return login == currentUser.login ? currentUser : nil
-    }
+    var user = User(login: "user123", fullName: "John Doe", avatar: UIImage(named: "teo")!, status: "Hello, World!")
 }

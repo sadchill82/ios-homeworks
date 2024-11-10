@@ -39,8 +39,6 @@ final class ProfileViewController: UIViewController {
         Self.postTableView.delegate = self
         Self.postTableView.refreshControl = UIRefreshControl()
         Self.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
-        
-        displayUserInfo()
     }
     
     private func setupConstraints() {
@@ -55,14 +53,6 @@ final class ProfileViewController: UIViewController {
     @objc func reloadTableView() {
         Self.postTableView.reloadData()
         Self.postTableView.refreshControl?.endRefreshing()
-    }
-    
-    func displayUserInfo() {
-        let headerView = ProfileHeaderView()
-        guard let user else { return }
-        headerView.avatarImageView.image = user.avatar
-        headerView.fullNameLabel.text = user.fullName
-        headerView.statusLabel.text = user.status
     }
 }
 
@@ -105,6 +95,11 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Self.headerIdent) as! ProfileHeaderView
+        if let user {
+            headerView.avatarImageView.image = user.avatar
+            headerView.fullNameLabel.text = user.fullName
+            headerView.statusLabel.text = user.status
+        }
         return headerView
     }
     
