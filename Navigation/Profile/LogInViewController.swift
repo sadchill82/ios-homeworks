@@ -7,6 +7,14 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
+    private let userService: UserService = {
+#if DEBUG
+        return TestUserService()
+#else
+        return CurrentUserService()
+#endif
+    }()
+
     // MARK: Visual content
     
     var loginScrollView: UIScrollView = {
@@ -170,8 +178,23 @@ final class LoginViewController: UIViewController {
     
     @objc private func touchLoginButton() {
         let profileVC = ProfileViewController()
-        navigationController?.setViewControllers([profileVC], animated: true)
+        guard let login = loginField.text, !login.isEmpty else {
+            showError(message: "Логин не может быть пустым.")
+            return
+        }
+        if let user = userService.fetchUser(login: login) {
+            profileVC.user = user
+            navigationController?.setViewControllers([profileVC], animated: true)
+        } else {
+            showError(message: "Некорректный логин")
+        }
     }
+    
+    private func showError(message: String) {
+            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     
     @objc private func keyboardShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
