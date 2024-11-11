@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */; };
 		CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */; };
+		CE25A3632CE28C0F00DF8291 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A3622CE28C0F00DF8291 /* Checker.swift */; };
+		CE25A3652CE28D0000DF8291 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A3642CE28D0000DF8291 /* LoginViewControllerDelegate.swift */; };
+		CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */; };
+		CE25A36D2CE2B26A00DF8291 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36C2CE2B26A00DF8291 /* LoginFactory.swift */; };
+		CE25A36F2CE2B29C00DF8291 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36E2CE2B29C00DF8291 /* MyLoginFactory.swift */; };
 		CE3209A42CB46D3A00FAA3F8 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3209A32CB46D3A00FAA3F8 /* PhotosTableViewCell.swift */; };
 		CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA52CD01F710077C7BA /* ExtensionUIImage.swift */; };
 		CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */; };
@@ -60,6 +65,11 @@
 /* Begin PBXFileReference section */
 		CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE25A3622CE28C0F00DF8291 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		CE25A3642CE28D0000DF8291 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
+		CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		CE25A36C2CE2B26A00DF8291 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		CE25A36E2CE2B29C00DF8291 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 		CE3209A32CB46D3A00FAA3F8 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		CE3A4BA52CD01F710077C7BA /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		CE3A4BA62CD01F710077C7BA /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
@@ -133,6 +143,11 @@
 				CE8966C12CE1185D00264494 /* UserService.swift */,
 				CE8966C62CE11B5A00264494 /* CurrentUserService.swift */,
 				CE8966CA2CE12A4100264494 /* TestUserService.swift */,
+				CE25A3622CE28C0F00DF8291 /* Checker.swift */,
+				CE25A3642CE28D0000DF8291 /* LoginViewControllerDelegate.swift */,
+				CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */,
+				CE25A36C2CE2B26A00DF8291 /* LoginFactory.swift */,
+				CE25A36E2CE2B29C00DF8291 /* MyLoginFactory.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -307,15 +322,20 @@
 				CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */,
 				CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */,
 				CE8966CB2CE12A4700264494 /* TestUserService.swift in Sources */,
+				CE25A3652CE28D0000DF8291 /* LoginViewControllerDelegate.swift in Sources */,
 				CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */,
 				CE8966BF2CE1180200264494 /* User.swift in Sources */,
 				CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */,
 				CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */,
+				CE25A36D2CE2B26A00DF8291 /* LoginFactory.swift in Sources */,
 				CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */,
 				CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */,
 				CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */,
+				CE25A3632CE28C0F00DF8291 /* Checker.swift in Sources */,
+				CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */,
 				CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */,
 				CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */,
+				CE25A36F2CE2B29C00DF8291 /* MyLoginFactory.swift in Sources */,
 				CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */,
 				CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */,
 			);
