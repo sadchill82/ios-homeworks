@@ -14,7 +14,9 @@ final class LoginViewController: UIViewController {
         return CurrentUserService()
 #endif
     }()
-
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     // MARK: Visual content
     
     var loginScrollView: UIScrollView = {
@@ -177,16 +179,21 @@ final class LoginViewController: UIViewController {
     // MARK: - Event handlers
     
     @objc private func touchLoginButton() {
-        let profileVC = ProfileViewController()
-        guard let login = loginField.text, !login.isEmpty else {
-            showError(message: "Логин не может быть пустым.")
+        guard let login = loginField.text, !login.isEmpty, let password = passwordField.text, !password.isEmpty else {
+            showError(message: "Логин и пароль не могут быть пустыми.")
             return
         }
-        if let user = userService.fetchUser(login: login) {
-            profileVC.user = user
-            navigationController?.setViewControllers([profileVC], animated: true)
+//        if let user = userService.fetchUser(login: login) {
+//            profileVC.user = user
+//            navigationController?.setViewControllers([profileVC], animated: true)
+//        } else {
+//            showError(message: "Некорректный логин")
+//        }
+        
+        if loginDelegate?.check(login: login, password: password) == true {
+            navigateToProfile(with: login)
         } else {
-            showError(message: "Некорректный логин")
+            showError(message: "Некорректный логин или пароль")
         }
     }
     
@@ -195,6 +202,16 @@ final class LoginViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
+    
+    private func navigateToProfile(with login: String) {
+        let profileVC = ProfileViewController()
+        if let user = userService.fetchUser(login: login) {
+            profileVC.user = user
+            navigationController?.setViewControllers([profileVC], animated: true)
+        } else {
+            showError(message: "Пользователь не найден.")
+        }
+    }
     
     @objc private func keyboardShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
