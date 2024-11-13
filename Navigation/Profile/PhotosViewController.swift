@@ -4,10 +4,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController, ImageLibrarySubscriber {
     
     let photoIdent = "photoCell"
+    private var images: [UIImage] = []
+    private var imagePublisherFacade: ImagePublisherFacade?
     
     // MARK: Visual objects
     
@@ -38,6 +41,14 @@ class PhotosViewController: UIViewController {
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
         setupConstraints()
+        
+        imagePublisherFacade = ImagePublisherFacade()
+        imagePublisherFacade?.subscribe(self)
+        imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: Photos.shared.examples)
+    }
+    
+    deinit {
+        imagePublisherFacade?.removeSubscription(for: self)
     }
     
     private func setupConstraints() {
@@ -70,17 +81,24 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let widthItem = (accessibleWidth / countItem)
         return CGSize(width: widthItem, height: widthItem * 0.56)
     }
+    
+    func receive(images: [UIImage]) {
+        self.images = images
+        photosCollectionView.reloadData()
+    }
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Photos.shared.examples.count
+//        return Photos.shared.examples.count
+        images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
-        cell.configCellCollection(photo: Photos.shared.examples[indexPath.item])
+//        cell.configCellCollection(photo: Photos.shared.examples[indexPath.item])\
+          cell.configCellCollection(photo: images[indexPath.item])
         return cell
     }
 }

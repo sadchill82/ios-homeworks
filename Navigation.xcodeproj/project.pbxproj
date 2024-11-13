@@ -14,6 +14,7 @@
 		CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */; };
 		CE25A36D2CE2B26A00DF8291 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36C2CE2B26A00DF8291 /* LoginFactory.swift */; };
 		CE25A36F2CE2B29C00DF8291 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36E2CE2B29C00DF8291 /* MyLoginFactory.swift */; };
+		CE26030F2CE3F4EC00589DF2 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = CE26030E2CE3F4EC00589DF2 /* iOSIntPackage */; };
 		CE3209A42CB46D3A00FAA3F8 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3209A32CB46D3A00FAA3F8 /* PhotosTableViewCell.swift */; };
 		CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA52CD01F710077C7BA /* ExtensionUIImage.swift */; };
 		CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */; };
@@ -115,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE4C8C62CDAD0050050471F /* StorageService.framework in Frameworks */,
+				CE26030F2CE3F4EC00589DF2 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +281,9 @@
 				Base,
 			);
 			mainGroup = CEDD007C2C6A9F980000C76C;
+			packageReferences = (
+				CE26030D2CE3F4EC00589DF2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = CEDD00862C6A9F980000C76C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -642,6 +647,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE26030D2CE3F4EC00589DF2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE26030E2CE3F4EC00589DF2 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE26030D2CE3F4EC00589DF2 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CEDD007D2C6A9F980000C76C /* Project object */;
 }
