@@ -44,7 +44,7 @@ class PhotosViewController: UIViewController, ImageLibrarySubscriber {
         
         imagePublisherFacade = ImagePublisherFacade()
         imagePublisherFacade?.subscribe(self)
-        imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 20)
+        imagePublisherFacade?.addImagesWithTimer(time: 0.5, repeat: 20, userImages: Photos.shared.examples)
     }
     
     deinit {
@@ -69,11 +69,6 @@ class PhotosViewController: UIViewController, ImageLibrarySubscriber {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
     }
-    
-    func receive(images: [UIImage]) {
-        self.images.append(contentsOf: images)
-        photosCollectionView.reloadData()
-    }
 }
 
 // MARK: - Extensions
@@ -85,6 +80,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let accessibleWidth = collectionView.frame.width - 32
         let widthItem = (accessibleWidth / countItem)
         return CGSize(width: widthItem, height: widthItem * 0.56)
+    }
+    
+    func receive(images: [UIImage]) {
+        self.images = images
+        photosCollectionView.reloadData()
     }
 }
 
