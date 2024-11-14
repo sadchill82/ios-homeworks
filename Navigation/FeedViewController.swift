@@ -7,12 +7,57 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     
+    private let feedModel = FeedModel(secretWord: "password")
+    
+    private let textField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Enter your password"
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    
+    private lazy var checkGuessButton: CustomButton = {
+        CustomButton(title: "Введите слово", titleColor: .white, backgroundColor: .systemBlue) {
+            [weak self] in self?.checkGuess()
+        }
+    }()
+    
+    private let resultLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemTeal
         
+        view.addSubview(textField)
+        view.addSubview(checkGuessButton)
+        view.addSubview(resultLabel)
+        
         createSubView()
+        setupConstraints()
+    }
+    
+    private func checkGuess() {
+        guard let inputText = textField.text, !inputText.isEmpty else {
+            resultLabel.text = "Введите слово!"
+            resultLabel.textColor = .red
+            return
+        }
+        
+        if feedModel.check(word: inputText) {
+            resultLabel.text = "Верно!"
+            resultLabel.textColor = .green
+        } else {
+            resultLabel.text = "Неверно!"
+            resultLabel.textColor = .red
+        }
     }
     
     private func createSubView() {
@@ -39,7 +84,6 @@ final class FeedViewController: UIViewController {
         button.backgroundColor = color
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
-        button.addTarget(self, action: selector, for: .touchUpInside)
         view.addArrangedSubview(button)
     }
     
@@ -49,5 +93,24 @@ final class FeedViewController: UIViewController {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            textField.widthAnchor.constraint(equalToConstant: 250),
+            textField.heightAnchor.constraint(equalToConstant: 40),
+
+            checkGuessButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            checkGuessButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
+            checkGuessButton.widthAnchor.constraint(equalToConstant: 150),
+            checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
+
+            resultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            resultLabel.topAnchor.constraint(equalTo: checkGuessButton.bottomAnchor, constant: 20),
+            resultLabel.widthAnchor.constraint(equalToConstant: 250),
+            resultLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
 }

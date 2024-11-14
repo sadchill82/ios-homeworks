@@ -51,8 +51,12 @@ final class LoginViewController: UIViewController {
         return stack
     }()
     
-    var loginButton: UIButton = {
-        let button = UIButton()
+    lazy var loginButton: CustomButton = {
+        let button = CustomButton(
+            title: "Login",
+            titleColor: .white,
+            action: touchLoginButton
+        )
         button.translatesAutoresizingMaskIntoConstraints = false
         
         if let pixel = UIImage(named: "blue_pixel") {
@@ -62,9 +66,6 @@ final class LoginViewController: UIViewController {
             button.setBackgroundImage(pixel.image(alpha: 0.4), for: .disabled)
         }
         
-        button.setTitle("Login", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(nil, action: #selector(touchLoginButton), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
         return button
