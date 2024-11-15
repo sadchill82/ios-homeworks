@@ -186,12 +186,6 @@ final class LoginViewController: UIViewController {
             showError(message: "Логин и пароль не могут быть пустыми.")
             return
         }
-//        if let user = userService.fetchUser(login: login) {
-//            profileVC.user = user
-//            navigationController?.setViewControllers([profileVC], animated: true)
-//        } else {
-//            showError(message: "Некорректный логин")
-//        }
         
         if loginDelegate?.check(login: login, password: password) == true {
             navigateToProfile(with: login)
@@ -207,9 +201,10 @@ final class LoginViewController: UIViewController {
         }
     
     private func navigateToProfile(with login: String) {
-        let profileVC = ProfileViewController()
         if let user = userService.fetchUser(login: login) {
-            profileVC.user = user
+            let viewModel = ProfileViewModel(user: user, posts: postExamples)
+            let profileVC = ProfileViewController()
+            profileVC.configure(with: viewModel)
             navigationController?.setViewControllers([profileVC], animated: true)
         } else {
             showError(message: "Пользователь не найден.")
