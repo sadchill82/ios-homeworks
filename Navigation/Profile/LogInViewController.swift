@@ -7,6 +7,7 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
+    var coordinator: ProfileCoordinator?
     private let userService: UserService = {
 #if DEBUG
         return TestUserService()
@@ -188,27 +189,20 @@ final class LoginViewController: UIViewController {
         }
         
         if loginDelegate?.check(login: login, password: password) == true {
-            navigateToProfile(with: login)
+            if let user = userService.fetchUser(login: login) {
+                coordinator?.showProfile(for: user)
+            } else {
+                showError(message: "Пользователь не найден.")
+            }
         } else {
             showError(message: "Некорректный логин или пароль")
         }
     }
     
     private func showError(message: String) {
-            let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    
-    private func navigateToProfile(with login: String) {
-        if let user = userService.fetchUser(login: login) {
-            let viewModel = ProfileViewModel(user: user, posts: postExamples)
-            let profileVC = ProfileViewController()
-            profileVC.configure(with: viewModel)
-            navigationController?.setViewControllers([profileVC], animated: true)
-        } else {
-            showError(message: "Пользователь не найден.")
-        }
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc private func keyboardShow(notification: NSNotification) {

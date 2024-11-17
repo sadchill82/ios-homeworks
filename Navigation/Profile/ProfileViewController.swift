@@ -7,6 +7,8 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    var coordinator: ProfileCoordinator?
+    
     private var viewModel: ProfileViewModel!
     
     static let headerIdent = "header"
@@ -36,7 +38,6 @@ final class ProfileViewController: UIViewController {
         configureHeader()
     }
     
-    // Метод для настройки ViewModel
     func configure(with viewModel: ProfileViewModel) {
         self.viewModel = viewModel
     }
