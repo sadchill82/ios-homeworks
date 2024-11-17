@@ -27,6 +27,7 @@
 		CE8966C22CE1185D00264494 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8966C12CE1185D00264494 /* UserService.swift */; };
 		CE8966C72CE11B5A00264494 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8966C62CE11B5A00264494 /* CurrentUserService.swift */; };
 		CE8966CB2CE12A4700264494 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8966CA2CE12A4100264494 /* TestUserService.swift */; };
+		CE9478172CE7E95E00E42974 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9478162CE7E95E00E42974 /* ProfileViewModel.swift */; };
 		CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */; };
 		CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00882C6A9F980000C76C /* AppDelegate.swift */; };
 		CEDD00922C6A9F9A0000C76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDD00912C6A9F9A0000C76C /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		CE8966C12CE1185D00264494 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CE8966C62CE11B5A00264494 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		CE8966CA2CE12A4100264494 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		CE9478162CE7E95E00E42974 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CEDD00852C6A9F980000C76C /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDD00882C6A9F980000C76C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				CE25A36E2CE2B29C00DF8291 /* MyLoginFactory.swift */,
 				CE0B806A2CE55A3800245D08 /* CustomButton.swift */,
 				CE7963612CE6879A00A4CF04 /* FeedModel.swift */,
+				CE9478162CE7E95E00E42974 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				CEDE381B2CBAF73A005F32EE /* PhotosCollectionViewCell.swift in Sources */,
 				CE8966C22CE1185D00264494 /* UserService.swift in Sources */,
 				CEDE38192CBAF271005F32EE /* PhotosViewController.swift in Sources */,
+				CE9478172CE7E95E00E42974 /* ProfileViewModel.swift in Sources */,
 				CE8966C72CE11B5A00264494 /* CurrentUserService.swift in Sources */,
 				CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */,
 				CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */,
