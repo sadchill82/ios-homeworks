@@ -7,6 +7,8 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     
+    var coordinator: FeedCoordinator?
+    
     private let feedModel = FeedModel(secretWord: "password")
     
     private let textField: UITextField = {
