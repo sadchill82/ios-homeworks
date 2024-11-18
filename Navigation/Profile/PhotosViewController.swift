@@ -68,21 +68,20 @@ class PhotosViewController: UIViewController {
         let qos: QualityOfService = .userInitiated
         
         let startTime = CFAbsoluteTimeGetCurrent()
-
+        
         imageProcessor.processImagesOnThread(sourceImages: images, filter: filter, qos: qos) { [weak self] processedCGImages in
             let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
             print("Обработка завершена за \(timeElapsed) секунд с QoS: \(qos)")
             
+            self?.processedImages = processedCGImages
+                .compactMap { $0 }
+                .map { UIImage(cgImage: $0) }
             DispatchQueue.main.async {
-                self?.processedImages = processedCGImages.compactMap { cgImage in
-                    guard let cgImage = cgImage else { return nil }
-                    return UIImage(cgImage: cgImage)
-                }
                 self?.photosCollectionView.reloadData()
             }
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
