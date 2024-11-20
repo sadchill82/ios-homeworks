@@ -44,6 +44,7 @@
 		CEE7CDEB2CEA7794000DDD6D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDEA2CEA7794000DDD6D /* ProfileCoordinator.swift */; };
 		CEE7CDED2CEA78E0000DDD6D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDEC2CEA78E0000DDD6D /* FeedCoordinator.swift */; };
 		CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF298F82CACA5A00072E47F /* LogInViewController.swift */; };
+		CEF58E2C2CEE645E008C5D10 /* BruteForcePasswordCracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF58E2B2CEE645E008C5D10 /* BruteForcePasswordCracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		CEE7CDEA2CEA7794000DDD6D /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		CEE7CDEC2CEA78E0000DDD6D /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		CEF298F82CACA5A00072E47F /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		CEF58E2B2CEE645E008C5D10 /* BruteForcePasswordCracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcePasswordCracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -171,6 +173,7 @@
 				CEE7CDE82CEA771B000DDD6D /* MainCoordinator.swift */,
 				CEE7CDEA2CEA7794000DDD6D /* ProfileCoordinator.swift */,
 				CEE7CDEC2CEA78E0000DDD6D /* FeedCoordinator.swift */,
+				CEF58E2B2CEE645E008C5D10 /* BruteForcePasswordCracker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */,
 				CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */,
 				CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */,
+				CEF58E2C2CEE645E008C5D10 /* BruteForcePasswordCracker.swift in Sources */,
 				CE25A36F2CE2B29C00DF8291 /* MyLoginFactory.swift in Sources */,
 				CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */,
 				CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */,
