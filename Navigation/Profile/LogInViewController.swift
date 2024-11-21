@@ -211,19 +211,25 @@ final class LoginViewController: UIViewController {
     // MARK: - Event handlers
     
     @objc private func touchLoginButton() {
-        guard let login = loginField.text, !login.isEmpty, let password = passwordField.text, !password.isEmpty else {
-            showError(message: "Логин и пароль не могут быть пустыми.")
-            return
+        switch attemptLogin() {
+        case .success:
+            if let login = loginField.text {
+                navigateToProfile(with: login)
+            }
+        case .failure(let error):
+            showError(message: error.localizedDescription)
+        }
+    }
+    
+    private func attemptLogin() -> Result<Void, LoginError> {
+        guard let login = loginField.text, let password = passwordField.text else {
+            return .failure(.emptyFields)
         }
         
         if loginDelegate?.check(login: login, password: password) == true {
-            if let user = userService.fetchUser(login: login) {
-                coordinator?.showProfile(for: user)
-            } else {
-                showError(message: "Пользователь не найден.")
-            }
+            return .success(())
         } else {
-            showError(message: "Некорректный логин или пароль")
+            return .failure(.invalidCredentials)
         }
     }
     
@@ -231,6 +237,17 @@ final class LoginViewController: UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToProfile(with login: String) {
+        guard let user = userService.fetchUser(login: login) else {
+            preconditionFailure("Пользователь с логином \(login) должен существовать в базе данных.")
+        }
+        
+        let viewModel = ProfileViewModel(user: user, posts: postExamples)
+        let profileVC = ProfileViewController()
+        profileVC.configure(with: viewModel)
+        navigationController?.setViewControllers([profileVC], animated: true)
     }
     
     @objc private func keyboardShow(notification: NSNotification) {

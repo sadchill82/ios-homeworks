@@ -10,6 +10,7 @@
 		CE0B806B2CE55A3800245D08 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B806A2CE55A3800245D08 /* CustomButton.swift */; };
 		CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */; };
 		CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */; };
+		CE1E0A7B2CEFC67A00C9A742 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E0A7A2CEFC67A00C9A742 /* LoginError.swift */; };
 		CE25A3632CE28C0F00DF8291 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A3622CE28C0F00DF8291 /* Checker.swift */; };
 		CE25A3652CE28D0000DF8291 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A3642CE28D0000DF8291 /* LoginViewControllerDelegate.swift */; };
 		CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */; };
@@ -75,6 +76,7 @@
 		CE0B806A2CE55A3800245D08 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE1E0A7A2CEFC67A00C9A742 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		CE25A3622CE28C0F00DF8291 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		CE25A3642CE28D0000DF8291 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		CE25A36A2CE2A45F00DF8291 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				CEE7CDEA2CEA7794000DDD6D /* ProfileCoordinator.swift */,
 				CEE7CDEC2CEA78E0000DDD6D /* FeedCoordinator.swift */,
 				CEF58E2B2CEE645E008C5D10 /* BruteForcePasswordCracker.swift */,
+				CE1E0A7A2CEFC67A00C9A742 /* LoginError.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				CE25A36D2CE2B26A00DF8291 /* LoginFactory.swift in Sources */,
 				CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */,
 				CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */,
+				CE1E0A7B2CEFC67A00C9A742 /* LoginError.swift in Sources */,
 				CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */,
 				CE25A3632CE28C0F00DF8291 /* Checker.swift in Sources */,
 				CE25A36B2CE2A45F00DF8291 /* LoginInspector.swift in Sources */,
