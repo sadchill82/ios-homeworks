@@ -20,6 +20,24 @@ final class LoginViewController: UIViewController {
     
     // MARK: Visual content
     
+    private lazy var bruteForceButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Подобрать пароль", for: .normal)
+        button.addTarget(self, action: #selector(startBruteForce), for: .touchUpInside)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -122,6 +140,8 @@ final class LoginViewController: UIViewController {
         loginScrollView.addSubview(contentView)
         
         contentView.addSubviews(vkLogo, loginStackView, loginButton)
+        view.addSubview(bruteForceButton)
+        view.addSubview(activityIndicator)
         
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
@@ -161,6 +181,14 @@ final class LoginViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            bruteForceButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 20),
+            bruteForceButton.leadingAnchor.constraint(equalTo: passwordField.leadingAnchor),
+            bruteForceButton.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
+            bruteForceButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordField.centerYAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor, constant: -10)
         ])
     }
     
@@ -214,6 +242,34 @@ final class LoginViewController: UIViewController {
     
     @objc private func keyboardHide(notification: NSNotification) {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+    }
+    
+    @objc private func startBruteForce() {
+        let cracker = BruteForcePasswordCracker()
+        let randomPassword = cracker.generateRandomPassword(length: 4)
+//        let randomPassword = "6f=_"
+        print("Generated password: \(randomPassword)")
+        
+        passwordField.text = "****"
+        bruteForceButton.isHidden = true
+        loginButton.isEnabled = false
+        loginButton.isOpaque = true
+        activityIndicator.startAnimating()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let foundPassword = cracker.bruteForce(passwordToUnlock: randomPassword) { currentAttempt in
+//                print("Current attempt: \(currentAttempt)")
+            }
+            
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.loginButton.isEnabled = true
+                self?.loginButton.isOpaque = false
+                self?.passwordField.isSecureTextEntry = false
+                self?.passwordField.text = foundPassword
+                print("Password found: \(foundPassword)")
+            }
+        }
     }
 }
 
