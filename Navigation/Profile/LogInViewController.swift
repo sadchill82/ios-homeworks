@@ -251,6 +251,9 @@ final class LoginViewController: UIViewController {
         print("Generated password: \(randomPassword)")
         
         passwordField.text = "****"
+        bruteForceButton.isHidden = true
+        loginButton.isEnabled = false
+        loginButton.isOpaque = true
         activityIndicator.startAnimating()
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -260,6 +263,8 @@ final class LoginViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
+                self?.loginButton.isEnabled = true
+                self?.loginButton.isOpaque = false
                 self?.passwordField.isSecureTextEntry = false
                 self?.passwordField.text = foundPassword
                 print("Password found: \(foundPassword)")
