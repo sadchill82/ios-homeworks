@@ -210,6 +210,34 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Event handlers
     
+//    @objc private func touchLoginButton() {
+//        do {
+//            try validateLoginFields()
+//            try attemptLogin()
+//        } catch let error as LoginError {
+//            showError(message: error.localizedDescription)
+//        } catch {
+//            showError(message: "Неизвестная ошибка.")
+//        }
+//    }
+//    
+//    private func validateLoginFields() throws {
+//        guard let login = loginField.text, !login.isEmpty,
+//              let password = passwordField.text, !password.isEmpty else {
+//            throw LoginError.emptyFields
+//        }
+//    }
+//    
+//    private func attemptLogin() throws {
+//        guard let login = loginField.text, let password = passwordField.text else { return }
+//        
+//        if loginDelegate?.check(login: login, password: password) == true {
+//            navigateToProfile(with: login)
+//        } else {
+//            throw LoginError.invalidCredentials
+//        }
+//    }
+    
     @objc private func touchLoginButton() {
         switch attemptLogin() {
         case .success:
