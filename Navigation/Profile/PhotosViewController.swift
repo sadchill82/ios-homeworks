@@ -4,10 +4,14 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     let photoIdent = "photoCell"
+    private var images: [UIImage] = []
+    private var processedImages: [UIImage] = []
+    private let imageProcessor = ImageProcessor()
     
     // MARK: Visual objects
     
@@ -16,7 +20,7 @@ class PhotosViewController: UIViewController {
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return layout
     }()
     
@@ -34,19 +38,48 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Photo Gallery"
-        self.view.addSubview(photosCollectionView)
-        self.photosCollectionView.dataSource = self
-        self.photosCollectionView.delegate = self
+        view.addSubview(photosCollectionView)
+        photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
         setupConstraints()
+        
+        loadImages()
+        processImages()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            photosCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            photosCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            photosCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            photosCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    // MARK: - Load and Process Images
+    
+    private func loadImages() {
+        // Загружаем изображения в массив
+        images = Photos.shared.examples
+    }
+    
+    private func processImages() {
+        let filter: ColorFilter = .noir
+        let qos: QualityOfService = .userInitiated
+        
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        imageProcessor.processImagesOnThread(sourceImages: images, filter: filter, qos: qos) { [weak self] processedCGImages in
+            let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+            print("Обработка завершена за \(timeElapsed) секунд с QoS: \(qos)")
+            
+            self?.processedImages = processedCGImages
+                .compactMap { $0 }
+                .map { UIImage(cgImage: $0) }
+            DispatchQueue.main.async {
+                self?.photosCollectionView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,12 +108,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Photos.shared.examples.count
+        return processedImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
-        cell.configCellCollection(photo: Photos.shared.examples[indexPath.item])
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.configCellCollection(photo: processedImages[indexPath.item])
         return cell
     }
 }

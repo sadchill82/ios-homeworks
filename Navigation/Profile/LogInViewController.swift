@@ -7,7 +7,36 @@ import UIKit
 
 final class LoginViewController: UIViewController {
     
+    var coordinator: ProfileCoordinator?
+    private let userService: UserService = {
+#if DEBUG
+        return TestUserService()
+#else
+        return CurrentUserService()
+#endif
+    }()
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     // MARK: Visual content
+    
+    private lazy var bruteForceButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Подобрать пароль", for: .normal)
+        button.addTarget(self, action: #selector(startBruteForce), for: .touchUpInside)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     
     var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -41,8 +70,12 @@ final class LoginViewController: UIViewController {
         return stack
     }()
     
-    var loginButton: UIButton = {
-        let button = UIButton()
+    lazy var loginButton: CustomButton = {
+        let button = CustomButton(
+            title: "Login",
+            titleColor: .white,
+            action: touchLoginButton
+        )
         button.translatesAutoresizingMaskIntoConstraints = false
         
         if let pixel = UIImage(named: "blue_pixel") {
@@ -52,9 +85,6 @@ final class LoginViewController: UIViewController {
             button.setBackgroundImage(pixel.image(alpha: 0.4), for: .disabled)
         }
         
-        button.setTitle("Login", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.addTarget(nil, action: #selector(touchLoginButton), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
         return button
@@ -64,6 +94,7 @@ final class LoginViewController: UIViewController {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.placeholder = "Log In"
+        login.text = "testUser"
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.25
         login.leftViewMode = .always
@@ -81,6 +112,7 @@ final class LoginViewController: UIViewController {
         password.translatesAutoresizingMaskIntoConstraints = false
         password.leftViewMode = .always
         password.placeholder = "Password"
+        password.text = "12345"
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.25
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
@@ -108,6 +140,8 @@ final class LoginViewController: UIViewController {
         loginScrollView.addSubview(contentView)
         
         contentView.addSubviews(vkLogo, loginStackView, loginButton)
+        view.addSubview(bruteForceButton)
+        view.addSubview(activityIndicator)
         
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
@@ -147,6 +181,14 @@ final class LoginViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            bruteForceButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 20),
+            bruteForceButton.leadingAnchor.constraint(equalTo: passwordField.leadingAnchor),
+            bruteForceButton.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
+            bruteForceButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordField.centerYAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor, constant: -10)
         ])
     }
     
@@ -168,8 +210,71 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Event handlers
     
+//    @objc private func touchLoginButton() {
+//        do {
+//            try validateLoginFields()
+//            try attemptLogin()
+//        } catch let error as LoginError {
+//            showError(message: error.localizedDescription)
+//        } catch {
+//            showError(message: "Неизвестная ошибка.")
+//        }
+//    }
+//    
+//    private func validateLoginFields() throws {
+//        guard let login = loginField.text, !login.isEmpty,
+//              let password = passwordField.text, !password.isEmpty else {
+//            throw LoginError.emptyFields
+//        }
+//    }
+//    
+//    private func attemptLogin() throws {
+//        guard let login = loginField.text, let password = passwordField.text else { return }
+//        
+//        if loginDelegate?.check(login: login, password: password) == true {
+//            navigateToProfile(with: login)
+//        } else {
+//            throw LoginError.invalidCredentials
+//        }
+//    }
+    
     @objc private func touchLoginButton() {
+        switch attemptLogin() {
+        case .success:
+            if let login = loginField.text {
+                navigateToProfile(with: login)
+            }
+        case .failure(let error):
+            showError(message: error.localizedDescription)
+        }
+    }
+    
+    private func attemptLogin() -> Result<Void, LoginError> {
+        guard let login = loginField.text, let password = passwordField.text else {
+            return .failure(.emptyFields)
+        }
+        
+        if loginDelegate?.check(login: login, password: password) == true {
+            return .success(())
+        } else {
+            return .failure(.invalidCredentials)
+        }
+    }
+    
+    private func showError(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToProfile(with login: String) {
+        guard let user = userService.fetchUser(login: login) else {
+            preconditionFailure("Пользователь с логином \(login) должен существовать в базе данных.")
+        }
+        
+        let viewModel = ProfileViewModel(user: user, posts: postExamples)
         let profileVC = ProfileViewController()
+        profileVC.configure(with: viewModel)
         navigationController?.setViewControllers([profileVC], animated: true)
     }
     
@@ -182,6 +287,34 @@ final class LoginViewController: UIViewController {
     
     @objc private func keyboardHide(notification: NSNotification) {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+    }
+    
+    @objc private func startBruteForce() {
+        let cracker = BruteForcePasswordCracker()
+        let randomPassword = cracker.generateRandomPassword(length: 4)
+//        let randomPassword = "6f=_"
+        print("Generated password: \(randomPassword)")
+        
+        passwordField.text = "****"
+        bruteForceButton.isHidden = true
+        loginButton.isEnabled = false
+        loginButton.isOpaque = true
+        activityIndicator.startAnimating()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let foundPassword = cracker.bruteForce(passwordToUnlock: randomPassword) { currentAttempt in
+//                print("Current attempt: \(currentAttempt)")
+            }
+            
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.loginButton.isEnabled = true
+                self?.loginButton.isOpaque = false
+                self?.passwordField.isSecureTextEntry = false
+                self?.passwordField.text = foundPassword
+                print("Password found: \(foundPassword)")
+            }
+        }
     }
 }
 

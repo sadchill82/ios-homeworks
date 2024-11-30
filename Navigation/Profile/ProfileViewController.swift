@@ -7,6 +7,10 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    var coordinator: ProfileCoordinator?
+    
+    private var viewModel: ProfileViewModel!
+    
     static let headerIdent = "header"
     static let photoIdent = "photo"
     static let postIdent = "post"
@@ -26,13 +30,16 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
         view.addSubview(Self.postTableView)
         setupConstraints()
         Self.postTableView.dataSource = self
         Self.postTableView.delegate = self
-        Self.postTableView.refreshControl = UIRefreshControl()
-        Self.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        
+        configureHeader()
+    }
+    
+    func configure(with viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
     }
     
     private func setupConstraints() {
@@ -44,13 +51,21 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
+    private func configureHeader() {
+        guard let headerView = Self.postTableView.dequeueReusableHeaderFooterView(withIdentifier: Self.headerIdent) as? ProfileHeaderView else { return }
+        
+        headerView.avatarImageView.image = viewModel.getAvatar()
+        headerView.fullNameLabel.text = viewModel.getFullName()
+        headerView.statusLabel.text = viewModel.getStatus()
+    }
+    
     @objc func reloadTableView() {
         Self.postTableView.reloadData()
         Self.postTableView.refreshControl?.endRefreshing()
     }
 }
 
-// MARK: - Extensions
+// MARK: - UITableViewDataSource
 
 extension ProfileViewController: UITableViewDataSource {
     
@@ -67,9 +82,6 @@ extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-}
-
-extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -85,10 +97,16 @@ extension ProfileViewController: UITableViewDelegate {
             return UITableViewCell()
         }
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Self.headerIdent) as! ProfileHeaderView
+        configureHeader()
         return headerView
     }
     
