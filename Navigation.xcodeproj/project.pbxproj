@@ -15,6 +15,8 @@
 		CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA62CD01F710077C7BA /* ExtensionUIView.swift */; };
 		CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */; };
 		CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA92CD01F710077C7BA /* PostExamples.swift */; };
+		CE9AB0BE2CFB979B007A755B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BD2CFB979B007A755B /* NetworkService.swift */; };
+		CE9AB0C02CFB99C3007A755B /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */; };
 		CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */; };
 		CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00882C6A9F980000C76C /* AppDelegate.swift */; };
 		CEDD00922C6A9F9A0000C76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDD00912C6A9F9A0000C76C /* Assets.xcassets */; };
@@ -24,12 +26,7 @@
 		CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A22C6AA5940000C76C /* InfoViewController.swift */; };
 		CEDE38192CBAF271005F32EE /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE38182CBAF271005F32EE /* PhotosViewController.swift */; };
 		CEDE381B2CBAF73A005F32EE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE381A2CBAF73A005F32EE /* PhotosCollectionViewCell.swift */; };
-		CEE4C8C62CDAD0050050471F /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4C8BE2CDAD0050050471F /* StorageService.framework */; };
-		CEE4C8C72CDAD0050050471F /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE4C8BE2CDAD0050050471F /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CEE7CDE72CEA76C4000DDD6D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDE62CEA76C4000DDD6D /* Coordinator.swift */; };
-		CEE7CDE92CEA771B000DDD6D /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDE82CEA771B000DDD6D /* MainCoordinator.swift */; };
-		CEE7CDEB2CEA7794000DDD6D /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDEA2CEA7794000DDD6D /* ProfileCoordinator.swift */; };
-		CEE7CDED2CEA78E0000DDD6D /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE7CDEC2CEA78E0000DDD6D /* FeedCoordinator.swift */; };
+		CEE4C8C72CDAD0050050471F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF298F82CACA5A00072E47F /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CEE4C8C72CDAD0050050471F /* StorageService.framework in Embed Frameworks */,
+				CEE4C8C72CDAD0050050471F /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +63,8 @@
 		CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoExamples.swift; sourceTree = "<group>"; };
 		CE3A4BA92CD01F710077C7BA /* PostExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostExamples.swift; sourceTree = "<group>"; };
+		CE9AB0BD2CFB979B007A755B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CEDD00852C6A9F980000C76C /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDD00882C6A9F980000C76C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +131,15 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		CE9AB0C12CFB99C8007A755B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AB0BD2CFB979B007A755B /* NetworkService.swift */,
+				CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		CEDD007C2C6A9F980000C76C = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				CEDD00852C6A9F980000C76C /* Navigation.app */,
-				CEE4C8BE2CDAD0050050471F /* StorageService.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +160,7 @@
 		CEDD00872C6A9F980000C76C /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				CE9AB0C12CFB99C8007A755B /* Network */,
 				CE3A4BAA2CD01F710077C7BA /* Library */,
 				CE17684E2C6E918100A8C845 /* Profile */,
 				CEDD00882C6A9F980000C76C /* AppDelegate.swift */,
@@ -203,7 +211,6 @@
 			buildPhases = (
 				CEE4C8B92CDAD0050050471F /* Headers */,
 				CEE4C8BA2CDAD0050050471F /* Sources */,
-				CEE4C8BB2CDAD0050050471F /* Frameworks */,
 				CEE4C8BC2CDAD0050050471F /* Resources */,
 			);
 			buildRules = (
@@ -217,7 +224,6 @@
 			packageProductDependencies = (
 			);
 			productName = StorageService;
-			productReference = CEE4C8BE2CDAD0050050471F /* StorageService.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -281,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9AB0C02CFB99C3007A755B /* AppConfiguration.swift in Sources */,
 				CE3209A42CB46D3A00FAA3F8 /* PhotosTableViewCell.swift in Sources */,
 				CEDE381B2CBAF73A005F32EE /* PhotosCollectionViewCell.swift in Sources */,
 				CEDE38192CBAF271005F32EE /* PhotosViewController.swift in Sources */,
@@ -291,6 +298,7 @@
 				CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */,
 				CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */,
 				CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */,
+				CE9AB0BE2CFB979B007A755B /* NetworkService.swift in Sources */,
 				CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */,
 				CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */,
 				CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */,
