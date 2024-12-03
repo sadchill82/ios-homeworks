@@ -8,10 +8,9 @@
 import Foundation
 
 struct NetworkService {
-    static func request(for configuration: AppConfiguration) {
-        let urlString = configuration.urlString
-        guard let url = URL(string: urlString) else {
-            print("Invalid URL: \(urlString)")
+    static func request(url: URL?) {
+        guard let url = url else {
+            print("Invalid URL")
             return
         }
         

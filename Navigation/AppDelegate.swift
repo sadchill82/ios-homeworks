@@ -14,21 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let randomIndex = Int.random(in: 0...2)
-        switch randomIndex {
-        case 0:
-            appConfiguration = .people("https://swapi.dev/api/people/8")
-        case 1:
-            appConfiguration = .starship("https://swapi.dev/api/starships/3")
-        case 2:
-            appConfiguration = .planet("https://swapi.dev/api/planets/5")
-        default:
-            break
+        appConfiguration = AppConfiguration.allCases.randomElement()
+        if let url = appConfiguration?.url {
+            NetworkService.request(url: url)
         }
-        
-        if let configuration = appConfiguration {
-            NetworkService.request(for: configuration)
-        }
+
         
         let loginVC = LoginViewController()
         let profileNC = UINavigationController(rootViewController: loginVC)
