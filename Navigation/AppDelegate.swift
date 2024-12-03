@@ -8,13 +8,28 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
     var window: UIWindow?
+    var appConfiguration: AppConfiguration?
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // create tab bar with feed and profile items
+        let randomIndex = Int.random(in: 0...2)
+        switch randomIndex {
+        case 0:
+            appConfiguration = .people("https://swapi.dev/api/people/8")
+        case 1:
+            appConfiguration = .starship("https://swapi.dev/api/starships/3")
+        case 2:
+            appConfiguration = .planet("https://swapi.dev/api/planets/5")
+        default:
+            break
+        }
+        
+        if let configuration = appConfiguration {
+            NetworkService.request(for: configuration)
+        }
+        
         let loginVC = LoginViewController()
         let profileNC = UINavigationController(rootViewController: loginVC)
         profileNC.tabBarItem = UITabBarItem(title: "Profile",
