@@ -15,6 +15,8 @@
 		CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA62CD01F710077C7BA /* ExtensionUIView.swift */; };
 		CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */; };
 		CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA92CD01F710077C7BA /* PostExamples.swift */; };
+		CE72E3E62CFF9D1100A0990F /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72E3E52CFF9D1100A0990F /* Planet.swift */; };
+		CE72E3E82CFF9E0500A0990F /* Resident.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72E3E72CFF9E0500A0990F /* Resident.swift */; };
 		CE9AB0BE2CFB979B007A755B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BD2CFB979B007A755B /* NetworkService.swift */; };
 		CE9AB0C02CFB99C3007A755B /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */; };
 		CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */; };
@@ -24,6 +26,7 @@
 		CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD009C2C6AA5680000C76C /* FeedViewController.swift */; };
 		CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A02C6AA5880000C76C /* PostViewController.swift */; };
 		CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD00A22C6AA5940000C76C /* InfoViewController.swift */; };
+		CEDD3C942CFE447A004401CC /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD3C932CFE447A004401CC /* Todo.swift */; };
 		CEDE38192CBAF271005F32EE /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE38182CBAF271005F32EE /* PhotosViewController.swift */; };
 		CEDE381B2CBAF73A005F32EE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE381A2CBAF73A005F32EE /* PhotosCollectionViewCell.swift */; };
 		CEE4C8C72CDAD0050050471F /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -63,6 +66,8 @@
 		CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoExamples.swift; sourceTree = "<group>"; };
 		CE3A4BA92CD01F710077C7BA /* PostExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostExamples.swift; sourceTree = "<group>"; };
+		CE72E3E52CFF9D1100A0990F /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		CE72E3E72CFF9E0500A0990F /* Resident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resident.swift; sourceTree = "<group>"; };
 		CE9AB0BD2CFB979B007A755B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 		CEDD009C2C6AA5680000C76C /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CEDD00A02C6AA5880000C76C /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CEDD00A22C6AA5940000C76C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CEDD3C932CFE447A004401CC /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		CEDE38182CBAF271005F32EE /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		CEDE381A2CBAF73A005F32EE /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEF298F82CACA5A00072E47F /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -163,14 +169,25 @@
 				CE9AB0C12CFB99C8007A755B /* Network */,
 				CE3A4BAA2CD01F710077C7BA /* Library */,
 				CE17684E2C6E918100A8C845 /* Profile */,
+				CEDD3C922CFE4463004401CC /* Info */,
 				CEDD00882C6A9F980000C76C /* AppDelegate.swift */,
 				CEDD00912C6A9F9A0000C76C /* Assets.xcassets */,
 				CEDD00932C6A9F9A0000C76C /* LaunchScreen.storyboard */,
 				CEDD00962C6A9F9A0000C76C /* Info.plist */,
 				CEDD009C2C6AA5680000C76C /* FeedViewController.swift */,
-				CEDD00A22C6AA5940000C76C /* InfoViewController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		CEDD3C922CFE4463004401CC /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				CE72E3E72CFF9E0500A0990F /* Resident.swift */,
+				CE72E3E52CFF9D1100A0990F /* Planet.swift */,
+				CEDD3C932CFE447A004401CC /* Todo.swift */,
+				CEDD00A22C6AA5940000C76C /* InfoViewController.swift */,
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +311,7 @@
 				CEDD00A12C6AA5880000C76C /* PostViewController.swift in Sources */,
 				CEF298F92CACA5A00072E47F /* LogInViewController.swift in Sources */,
 				CEDD00892C6A9F980000C76C /* AppDelegate.swift in Sources */,
+				CEDD3C942CFE447A004401CC /* Todo.swift in Sources */,
 				CEDD00A32C6AA5940000C76C /* InfoViewController.swift in Sources */,
 				CEDD009D2C6AA5680000C76C /* FeedViewController.swift in Sources */,
 				CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */,
@@ -303,8 +321,10 @@
 				CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */,
 				CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */,
 				CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */,
+				CE72E3E82CFF9E0500A0990F /* Resident.swift in Sources */,
 				CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */,
 				CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */,
+				CE72E3E62CFF9D1100A0990F /* Planet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

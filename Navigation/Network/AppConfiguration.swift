@@ -7,19 +7,12 @@
 
 import Foundation
 
-enum AppConfiguration {
-    case people(String)
-    case starship(String)
-    case planet(String)
+enum AppConfiguration: String, CaseIterable {
+    case people = "https://swapi.dev/api/people"
+    case starships = "https://swapi.dev/api/starships"
+    case planets = "https://swapi.dev/api/planets"
     
-    var urlString: String {
-        switch self {
-        case .people(let url):
-            return url
-        case .starship(let url):
-            return url
-        case .planet(let url):
-            return url
-        }
+    var url: URL? {
+        URL(string: self.rawValue)
     }
 }
