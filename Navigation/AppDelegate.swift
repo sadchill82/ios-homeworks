@@ -5,6 +5,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let url = appConfiguration?.url {
             NetworkService.request(url: url)
         }
-
+        
         
         let loginVC = LoginViewController()
         let profileNC = UINavigationController(rootViewController: loginVC)
@@ -44,5 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Error signing out: \(error)")
+        }
     }
 }
