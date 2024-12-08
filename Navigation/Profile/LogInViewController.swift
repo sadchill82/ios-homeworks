@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class LoginViewController: UIViewController {
     
@@ -101,6 +102,7 @@ final class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         setupViews()
+        setupTextFieldObservers()
     }
     
     private func setupViews() {
@@ -169,8 +171,60 @@ final class LoginViewController: UIViewController {
     // MARK: - Event handlers
     
     @objc private func touchLoginButton() {
+        
+        guard let email = loginField.text, !email.isEmpty, let password = passwordField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please fill in all fields")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            if let error = error as NSError? {
+                if error.code == AuthErrorCode.userNotFound.rawValue {
+                    self?.registerUser(email: email, password: password)
+                } else {
+                    self?.showAlert(title: "Login failed", message: error.localizedDescription)
+                }
+            } else {
+                self?.navigateToProfile()
+            }
+        }
+    }
+    
+    private func registerUser(email: String, password: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            if let error = error {
+                self?.showAlert(title: "Registration Failed", message: error.localizedDescription)
+            } else {
+                self?.showAlert(title: "Success", message: "User registered successfully!") {
+                    self?.navigateToProfile()
+                }
+            }
+        }
+    }
+    
+    private func navigateToProfile() {
         let profileVC = ProfileViewController()
-        navigationController?.setViewControllers([profileVC], animated: true)
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
+    private func setupTextFieldObservers() {
+        loginField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
+    }
+    
+    @objc private func textFieldsChanged() {
+        let isEnabled = !(loginField.text?.isEmpty ?? true) && !(passwordField.text?.isEmpty ?? true)
+        loginButton.isEnabled = isEnabled
+        loginButton.alpha = isEnabled ? 1.0 : 0.5
     }
     
     @objc private func keyboardShow(notification: NSNotification) {
