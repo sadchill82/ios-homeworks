@@ -4,9 +4,10 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 final class LoginViewController: UIViewController {
+    
+    var delegate: LoginViewControllerDelegate?
     
     // MARK: Visual content
     
@@ -45,17 +46,22 @@ final class LoginViewController: UIViewController {
     var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let pixel = UIImage(named: "blue_pixel") {
-            button.setBackgroundImage(pixel.image(alpha: 1), for: .normal)
-            button.setBackgroundImage(pixel.image(alpha: 0.8), for: .selected)
-            button.setBackgroundImage(pixel.image(alpha: 0.6), for: .highlighted)
-            button.setBackgroundImage(pixel.image(alpha: 0.4), for: .disabled)
-        }
-        
-        button.setTitle("Login", for: .normal)
+        button.setTitle("Sign In", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(nil, action: #selector(touchLoginButton), for: .touchUpInside)
+        button.backgroundColor = .systemBlue
+        button.addTarget(nil, action: #selector(signInTapped), for: .touchUpInside)
+        button.layer.cornerRadius = LayoutConstants.cornerRadius
+        button.clipsToBounds = true
+        return button
+    }()
+    
+    var signUpButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.addTarget(nil, action: #selector(signUpTapped), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
         return button
@@ -64,7 +70,7 @@ final class LoginViewController: UIViewController {
     var loginField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
-        login.placeholder = "Log In"
+        login.placeholder = "Email"
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.25
         login.leftViewMode = .always
@@ -80,10 +86,10 @@ final class LoginViewController: UIViewController {
     var passwordField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.leftViewMode = .always
         password.placeholder = "Password"
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.25
+        password.leftViewMode = .always
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
         password.isSecureTextEntry = true
         password.textColor = .black
@@ -102,14 +108,13 @@ final class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         setupViews()
-        setupTextFieldObservers()
     }
     
     private func setupViews() {
         view.addSubview(loginScrollView)
         loginScrollView.addSubview(contentView)
         
-        contentView.addSubviews(vkLogo, loginStackView, loginButton)
+        contentView.addSubviews(vkLogo, loginStackView, loginButton, signUpButton)
         
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
@@ -149,93 +154,65 @@ final class LoginViewController: UIViewController {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: LayoutConstants.indent),
+            signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
+            signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        let nc = NotificationCenter.default
-        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     
     // MARK: - Event handlers
     
-    @objc private func touchLoginButton() {
-        
-        guard let email = loginField.text, !email.isEmpty, let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in all fields")
+    @objc private func signInTapped() {
+        guard let email = loginField.text, !email.isEmpty,
+              let password = passwordField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please fill in both fields.")
             return
         }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error as NSError? {
-                if error.code == AuthErrorCode.userNotFound.rawValue {
-                    self?.registerUser(email: email, password: password)
-                } else {
-                    self?.showAlert(title: "Login failed", message: error.localizedDescription)
+        delegate?.checkCredentials(email: email, password: password) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.navigateToProfile()
+                case .failure(let error):
+                    self?.showAlert(title: "Sign In Failed", message: error.localizedDescription)
                 }
-            } else {
-                self?.navigateToProfile()
             }
         }
     }
     
-    private func registerUser(email: String, password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.showAlert(title: "Registration Failed", message: error.localizedDescription)
-            } else {
-                self?.showAlert(title: "Success", message: "User registered successfully!") {
-                    self?.navigateToProfile()
+    @objc private func signUpTapped() {
+        guard let email = loginField.text, !email.isEmpty,
+              let password = passwordField.text, !password.isEmpty else {
+            showAlert(title: "Error", message: "Please fill in both fields.")
+            return
+        }
+        
+        delegate?.signUp(email: email, password: password) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.showAlert(title: "Success", message: "User registered successfully!")
+                case .failure(let error):
+                    self?.showAlert(title: "Sign Up Failed", message: error.localizedDescription)
                 }
             }
         }
     }
+    
+    // MARK: - Navigation and Alerts
     
     private func navigateToProfile() {
         let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        navigationController?.setViewControllers([profileVC], animated: true)
     }
     
-    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+    private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            completion?()
-        }
-        alert.addAction(okAction)
-        present(alert, animated: true)
-    }
-    
-    private func setupTextFieldObservers() {
-        loginField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
-        passwordField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
-    }
-    
-    @objc private func textFieldsChanged() {
-        let isEnabled = !(loginField.text?.isEmpty ?? true) && !(passwordField.text?.isEmpty ?? true)
-        loginButton.isEnabled = isEnabled
-        loginButton.alpha = isEnabled ? 1.0 : 0.5
-    }
-    
-    @objc private func keyboardShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            loginScrollView.contentOffset.y = keyboardSize.height - (loginScrollView.frame.height - loginButton.frame.minY)
-            loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        }
-    }
-    
-    @objc private func keyboardHide(notification: NSNotification) {
-        loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -243,7 +220,7 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     
-    // tap 'done' on the keyboard
+    // Tap 'done' on the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
