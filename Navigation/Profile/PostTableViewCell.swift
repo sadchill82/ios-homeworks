@@ -8,6 +8,7 @@ import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
+    private var currentPost: Post?
     private var viewCounter = 0
     
     // MARK: Visual objects
@@ -46,7 +47,6 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    
     var postViews: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +62,10 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubviews(postAuthor, postImage, postDescription, postLikes, postViews)
         setupConstraints()
         self.selectionStyle = .default
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        contentView.addGestureRecognizer(doubleTap)
     }
     
     required init?(coder: NSCoder) {
@@ -95,6 +99,7 @@ class PostTableViewCell: UITableViewCell {
     // MARK: - Run loop
     
     func configPostArray(post: Post) {
+        self.currentPost = post
         postAuthor.text = post.author
         postDescription.text = post.description
         postImage.image = UIImage(named: post.image)
@@ -106,5 +111,17 @@ class PostTableViewCell: UITableViewCell {
     func incrementPostViewsCounter() {
         viewCounter += 1
         postViews.text = "Views: \(viewCounter)"
+    }
+    
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        guard let post = currentPost else { return }
+        
+        let postId = "\(post.author)-\(post.description)".hashValue.description
+        
+        CoreDataManager.shared.saveFavoritePost(id: postId,
+                                                text: post.description,
+                                                imageName: post.image)
+        
+        print("Пост с id \(postId) сохранён в избранное")
     }
 }
