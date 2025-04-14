@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Ислам on 15.04.2025.
+  
+*/
+
+"favorite" = "Избранное";
+"sign_in" = "Войти";
+"sign_up" = "Зарегистрироваться";
+"email" = "Электронная почта";
+"password" = "Пароль";
+"error" = "Ошибка";
+"please_fill_in_both_fields" = "Пожалуйста, заполните оба поля.";
+"sign_in_failed" = "Не удалось войти";
+"success" = "Успех";
+"user_registered_successfully" = "Пользователь успешно зарегистрирован!";
+"ok" = "ОК";
+
+"ready_to_help" = "Готов помочь";
+"teo_west" = "Тео Уэст";
+"ready" = "Готово...";
+"show_status" = "Показать статус";
+
+"info" = "Информация";
+
+"likes" = "Лайки:";
+"views" = "Просмотры:";
+
+"photos" = "Фотографии";
+"photo_gallery" = "Галерея фото";
+
+"alert" = "Оповещение";
+"fetch" = "Загрузить";
+"to_do_result_will_be_shown_here" = "Результаты задачи будут отображены здесь";
+"planet_result_will_be_shown_here" = "Результаты планеты будут отображены здесь";
+"attention" = "Внимание";
+"how_are_you_feeling" = "Как ты себя чувствуешь?";
+"fine" = "Хорошо";
+"so_so" = "Так себе";
+"todo_title" = "Заголовок задачи:";
+"planet_orbital_period" = "Орбитальный период планеты:";
+
+"post_number_one" = "Пост номер один";
+"post_number_two" = "Пост номер два";

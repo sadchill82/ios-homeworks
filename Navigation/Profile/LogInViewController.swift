@@ -46,7 +46,7 @@ final class LoginViewController: UIViewController {
     var loginButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sign In", for: .normal)
+        button.setTitle(NSLocalizedString("sign_in", comment: "Sign-in button title"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.addTarget(nil, action: #selector(signInTapped), for: .touchUpInside)
@@ -58,7 +58,7 @@ final class LoginViewController: UIViewController {
     var signUpButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sign Up", for: .normal)
+        button.setTitle(NSLocalizedString("sign_up", comment: "Sign-up button title"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.addTarget(nil, action: #selector(signUpTapped), for: .touchUpInside)
@@ -70,7 +70,7 @@ final class LoginViewController: UIViewController {
     var loginField: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
-        login.placeholder = "Email"
+        login.placeholder = NSLocalizedString("email", comment: "Email placeholder")
         login.layer.borderColor = UIColor.lightGray.cgColor
         login.layer.borderWidth = 0.25
         login.leftViewMode = .always
@@ -86,7 +86,7 @@ final class LoginViewController: UIViewController {
     var passwordField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.placeholder = "Password"
+        password.placeholder = NSLocalizedString("password", comment: "Password placeholder")
         password.layer.borderColor = UIColor.lightGray.cgColor
         password.layer.borderWidth = 0.25
         password.leftViewMode = .always
@@ -167,7 +167,7 @@ final class LoginViewController: UIViewController {
     @objc private func signInTapped() {
         guard let email = loginField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in both fields.")
+            showAlert(title: NSLocalizedString("error", comment: "Title for an alert"), message: NSLocalizedString("please_fill_in_both_fields", comment: "Message for an alert when user tries to sign in without filling in both fields"))
             return
         }
         
@@ -177,7 +177,7 @@ final class LoginViewController: UIViewController {
                 case .success:
                     self?.navigateToProfile()
                 case .failure(let error):
-                    self?.showAlert(title: "Sign In Failed", message: error.localizedDescription)
+                    self?.showAlert(title: NSLocalizedString("sign_in_failed", comment: "Title for an alert"), message: error.localizedDescription)
                 }
             }
         }
@@ -186,7 +186,7 @@ final class LoginViewController: UIViewController {
     @objc private func signUpTapped() {
         guard let email = loginField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in both fields.")
+            showAlert(title: "Error", message: NSLocalizedString("please_fill_in_both_fields", comment: "Message for an alert when user tries to sign in without filling in both fields"))
             return
         }
         
@@ -194,9 +194,9 @@ final class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.showAlert(title: "Success", message: "User registered successfully!")
+                    self?.showAlert(title: NSLocalizedString("success", comment: "Title for an alert when user successfully signs up"), message: NSLocalizedString("user_registered_successfully", comment: "Message for an alert when user successfully signs up") )
                 case .failure(let error):
-                    self?.showAlert(title: "Sign Up Failed", message: error.localizedDescription)
+                    self?.showAlert(title: NSLocalizedString("sign_in_failed", comment: "Title for an alert"), message: error.localizedDescription)
                 }
             }
         }
@@ -211,7 +211,7 @@ final class LoginViewController: UIViewController {
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: "Button title"), style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }

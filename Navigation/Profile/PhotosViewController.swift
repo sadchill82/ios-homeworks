@@ -33,7 +33,7 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Photo Gallery"
+        self.title = NSLocalizedString("photo_gallery", comment: "Photo gallery title")
         self.view.addSubview(photosCollectionView)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
