@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NetworkService.request(url: url)
         }
         
-        
         let loginVC = LoginViewController()
         loginVC.delegate = LoginInspector()
         let profileNC = UINavigationController(rootViewController: loginVC)
@@ -35,9 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                          image: UIImage(systemName: "text.bubble"),
                                          selectedImage: UIImage(systemName: "text.bubble.fill"))
         
+        let favoritesVC = FavoritesViewController()
+        let favoritesNC = UINavigationController(rootViewController: favoritesVC)
+        favoritesNC.tabBarItem = UITabBarItem(title: "Избранное",
+                                              image: UIImage(systemName: "star"),
+                                              selectedImage: UIImage(systemName: "star.fill"))
+        
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .white
-        tabBarController.viewControllers = [profileNC, feedNC]
+        tabBarController.viewControllers = [profileNC, feedNC, favoritesNC]
         
         // activate main window
         window = UIWindow(frame: UIScreen.main.bounds)
