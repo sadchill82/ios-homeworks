@@ -1,8 +1,3 @@
-//
-//  ProfileViewController.swift
-//  Navigation
-//
-
 import UIKit
 
 final class ProfileViewController: UIViewController {
@@ -17,6 +12,7 @@ final class ProfileViewController: UIViewController {
         table.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: headerIdent)
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: photoIdent)
         table.register(PostTableViewCell.self, forCellReuseIdentifier: postIdent)
+        table.backgroundColor = .palette.background
         return table
     }()
     
@@ -25,13 +21,16 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .palette.background
         
         view.addSubview(Self.postTableView)
         setupConstraints()
         Self.postTableView.dataSource = self
         Self.postTableView.delegate = self
-        Self.postTableView.refreshControl = UIRefreshControl()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .palette.textColor
+        Self.postTableView.refreshControl = refreshControl
         Self.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     }
     

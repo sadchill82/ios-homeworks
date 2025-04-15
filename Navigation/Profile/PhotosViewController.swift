@@ -1,29 +1,24 @@
-//
-//  PhotosViewController.swift
-//  Navigation
-//
-
 import UIKit
 
 class PhotosViewController: UIViewController {
     
     let photoIdent = "photoCell"
     
-    // MARK: Visual objects
+    // MARK: - Visual objects
     
     lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return layout
     }()
     
     lazy var photosCollectionView: UICollectionView = {
         let photos = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photos.translatesAutoresizingMaskIntoConstraints = false
-        photos.backgroundColor = .white
+        photos.backgroundColor = .palette.background
         photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photoIdent)
         return photos
     }()
@@ -34,6 +29,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "photo_gallery".localized
+        self.view.backgroundColor = .palette.background
         self.view.addSubview(photosCollectionView)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
@@ -64,7 +60,9 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let countItem: CGFloat = 2
         let accessibleWidth = collectionView.frame.width - 32
         let widthItem = (accessibleWidth / countItem)
@@ -74,12 +72,16 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotosViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return Photos.shared.examples.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         cell.configCellCollection(photo: Photos.shared.examples[indexPath.item])
         return cell
     }
