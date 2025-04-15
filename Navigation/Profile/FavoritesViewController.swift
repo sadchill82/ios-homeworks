@@ -22,7 +22,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Избранное"
+        title = "favorite".localized
         view.backgroundColor = .white
         
         view.addSubview(tableView)

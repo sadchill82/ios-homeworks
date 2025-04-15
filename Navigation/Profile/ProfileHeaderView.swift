@@ -17,7 +17,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     var returnAvatarButton = UIButton()
     var avatarBackground = UIView()
     
-    private var statusText = "Ready to help"
+    private var statusText = "ready_to_help".localized
     private var avatarOriginPoint = CGPoint()
     
     // MARK: - Setup section
@@ -40,7 +40,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
     
     private func setupNameLabel() {
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.text = "Teo West"
+        fullNameLabel.text = "teo_west".localized
         fullNameLabel.font = .boldSystemFont(ofSize: 18)
         fullNameLabel.textColor = .black
         addSubview(fullNameLabel)
@@ -77,7 +77,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         statusTextField.layer.cornerRadius = 8
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.gray.cgColor
-        statusTextField.attributedPlaceholder = NSAttributedString.init(string: "Ready...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        statusTextField.attributedPlaceholder = NSAttributedString.init(string: "ready".localized, attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         addSubview(statusTextField)
         NSLayoutConstraint.activate([
@@ -97,7 +97,7 @@ final class ProfileHeaderView: UITableViewHeaderFooterView {
         setStatusButton.layer.shadowRadius = 4
         setStatusButton.layer.shadowOpacity = 0.7
         setStatusButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        setStatusButton.setTitle("Show status", for: .normal)
+        setStatusButton.setTitle("show_status".localized, for: .normal)
         setStatusButton.setTitleColor(.white, for: .normal)
         setStatusButton.addTarget(self, action: #selector(statusButtonPressed), for: .touchUpInside)
         addSubview(setStatusButton)

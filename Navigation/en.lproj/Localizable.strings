@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Ислам on 15.04.2025.
+  
+*/
+
+"favorite" = "Favorite";
+"sign_in" = "Sign In";
+"sign_up"  = "Sign Up";
+"email" = "Email";
+"password" = "Password";
+"error" = "Error";
+"please_fill_in_both_fields" = "Please fill in both fields.";
+"sign_in_failed" = "Sign In Failed";
+"success" = "Success";
+"user_registered_successfully" = "User registered successfully!";
+"ok" = "OK";
+
+"ready_to_help" = "Ready to help";
+"teo_west" = "Teo West";
+"ready" = "Ready...";
+"show_status" = "Show status";
+
+"info" = "Info";
+
+"likes" = "Likes:";
+"views" = "Views:";
+
+"photos" = "Photos";
+"photo_gallery" = "Photo Gallery";
+
+"alert" = "Alert";
+"fetch" = "Fetch";
+"to_do_result_will_be_shown_here" = "To Do Result will be shown here";
+"planet_result_will_be_shown_here" = "Planet Result will be shown here";
+"attention" = "Attention";
+"how_are_you_feeling" = "How are you feeling?";
+"fine" = "Fine";
+"so_so" = "So-so";
+"todo_title" = "Todo Title:";
+"planet_orbital_period" = "Planet Orbital Period:";
+
+"post_number_one" = "Post number One";
+"post_number_two" = "Post number Two";

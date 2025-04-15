@@ -15,6 +15,7 @@
 		CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA62CD01F710077C7BA /* ExtensionUIView.swift */; };
 		CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */; };
 		CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA92CD01F710077C7BA /* PostExamples.swift */; };
+		CE406A592DAEDF3700BA2C76 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE406A582DAEDF3700BA2C76 /* String+Extensions.swift */; };
 		CE566CF62D05E9C40003209B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE566CF52D05E9C40003209B /* GoogleService-Info.plist */; };
 		CE566CFA2D05EDD40003209B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CE566CF92D05EDD40003209B /* FirebaseAnalytics */; };
 		CE566CFC2D05EDD40003209B /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = CE566CFB2D05EDD40003209B /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -29,6 +30,7 @@
 		CE7659C42D5E82F500780CEA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7659C32D5E82F500780CEA /* CoreDataManager.swift */; };
 		CE7659C62D5E84B700780CEA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7659C52D5E84B700780CEA /* FavoritesViewController.swift */; };
 		CE7659C82D5E882300780CEA /* FavoritePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7659C72D5E882300780CEA /* FavoritePostCell.swift */; };
+		CE95EC582DADB609002C3204 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE95EC562DADB609002C3204 /* Localizable.strings */; };
 		CE9AB0BE2CFB979B007A755B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BD2CFB979B007A755B /* NetworkService.swift */; };
 		CE9AB0C02CFB99C3007A755B /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */; };
 		CE9ECF062CB2BC2200C732BD /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */; };
@@ -81,6 +83,7 @@
 		CE3A4BA72CD01F710077C7BA /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoExamples.swift; sourceTree = "<group>"; };
 		CE3A4BA92CD01F710077C7BA /* PostExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostExamples.swift; sourceTree = "<group>"; };
+		CE406A582DAEDF3700BA2C76 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		CE566CF52D05E9C40003209B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE72E3E52CFF9D1100A0990F /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		CE72E3E72CFF9E0500A0990F /* Resident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resident.swift; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 		CE7659C32D5E82F500780CEA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CE7659C52D5E84B700780CEA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		CE7659C72D5E882300780CEA /* FavoritePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostCell.swift; sourceTree = "<group>"; };
+		CE95EC572DADB609002C3204 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE95EC592DADB626002C3204 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE9AB0BD2CFB979B007A755B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CE9AB0BF2CFB99C3007A755B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		CE9ECF052CB2BC2200C732BD /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -173,6 +178,14 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		CE406A572DAEDF0C00BA2C76 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE406A582DAEDF3700BA2C76 /* String+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CE9AB0C12CFB99C8007A755B /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +219,7 @@
 				CE3A4BAA2CD01F710077C7BA /* Library */,
 				CE17684E2C6E918100A8C845 /* Profile */,
 				CEDD3C922CFE4463004401CC /* Info */,
+				CE406A572DAEDF0C00BA2C76 /* Extensions */,
 				CEDD00882C6A9F980000C76C /* AppDelegate.swift */,
 				CE7659BA2D5E81BD00780CEA /* DataModel.xcdatamodeld */,
 				CEDD00912C6A9F9A0000C76C /* Assets.xcassets */,
@@ -213,6 +227,7 @@
 				CEDD00962C6A9F9A0000C76C /* Info.plist */,
 				CEDD009C2C6AA5680000C76C /* FeedViewController.swift */,
 				CE566CF52D05E9C40003209B /* GoogleService-Info.plist */,
+				CE95EC562DADB609002C3204 /* Localizable.strings */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -306,6 +321,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CEDD007C2C6A9F980000C76C;
 			packageReferences = (
@@ -327,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDD00922C6A9F9A0000C76C /* Assets.xcassets in Resources */,
+				CE95EC582DADB609002C3204 /* Localizable.strings in Resources */,
 				CEDD00952C6A9F9A0000C76C /* Base in Resources */,
 				CE566CF62D05E9C40003209B /* GoogleService-Info.plist in Resources */,
 			);
@@ -370,6 +387,7 @@
 				CE72E3E82CFF9E0500A0990F /* Resident.swift in Sources */,
 				CE7659C42D5E82F500780CEA /* CoreDataManager.swift in Sources */,
 				CE3A4BAE2CD01F710077C7BA /* LayoutConstants.swift in Sources */,
+				CE406A592DAEDF3700BA2C76 /* String+Extensions.swift in Sources */,
 				CE7659BC2D5E81BD00780CEA /* DataModel.xcdatamodeld in Sources */,
 				CEE79ED92D08D62F0048DE2C /* LoginViewControllerDelegate.swift in Sources */,
 				CE3A4BAF2CD01F710077C7BA /* PostExamples.swift in Sources */,
@@ -395,6 +413,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CE95EC562DADB609002C3204 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE95EC572DADB609002C3204 /* en */,
+				CE95EC592DADB626002C3204 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CEDD00932C6A9F9A0000C76C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -411,6 +438,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -474,6 +502,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
