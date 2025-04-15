@@ -25,7 +25,7 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
         // Create Alert Button
         let alertButton = UIButton()
         alertButton.translatesAutoresizingMaskIntoConstraints = false
-        alertButton.setTitle(NSLocalizedString("alert", comment: "Alert button"), for: .normal)
+        alertButton.setTitle("alert".localized, for: .normal)
         alertButton.backgroundColor = .systemPink
         alertButton.setTitleColor(.white, for: .normal)
         alertButton.layer.cornerRadius = 12
@@ -34,7 +34,7 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
         // Create Fetch Button
         let fetchButton = UIButton()
         fetchButton.translatesAutoresizingMaskIntoConstraints = false
-        fetchButton.setTitle(NSLocalizedString("fetch", comment: "Fetch button"), for: .normal)
+        fetchButton.setTitle("fetch".localized, for: .normal)
         fetchButton.backgroundColor = .systemBlue
         fetchButton.setTitleColor(.white, for: .normal)
         fetchButton.layer.cornerRadius = 12
@@ -44,13 +44,13 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
         toDoResultLabel.translatesAutoresizingMaskIntoConstraints = false
         toDoResultLabel.textAlignment = .center
         toDoResultLabel.numberOfLines = 0
-        toDoResultLabel.text = NSLocalizedString("to_do_result_will_be_shown_here", comment: "To-Do result label")
+        toDoResultLabel.text = "to_do_result_will_be_shown_here".localized
         
         // Setup Planet Result Label
         planetResultLabel.translatesAutoresizingMaskIntoConstraints = false
         planetResultLabel.textAlignment = .center
         planetResultLabel.numberOfLines = 0
-        planetResultLabel.text = NSLocalizedString("planet_result_will_be_shown_here", comment: "Planet result label")
+        planetResultLabel.text = "planet_result_will_be_shown_here".localized
         
         // Setup Residents Table View
         residentsTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,15 +99,15 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - Actions
     @objc func tapAlertButton() {
-        let alert = UIAlertController(title: NSLocalizedString("attention", comment: "Attention title"),
-                                      message: NSLocalizedString("how_are_you_feeling", comment: "How are you feeling message"),
+        let alert = UIAlertController(title: "attention".localized,
+                                      message: "how_are_you_feeling".localized,
                                       preferredStyle: .alert)
-        let fine = UIAlertAction(title: NSLocalizedString("fine", comment: "Fine"), style: .default) { _ in
+        let fine = UIAlertAction(title: "fine".localized, style: .default) { _ in
             print("Fine")
         }
         alert.addAction(fine)
         
-        let so = UIAlertAction(title: NSLocalizedString("so_so", comment: "So-so"), style: .destructive) { _ in
+        let so = UIAlertAction(title: "so_so".localized, style: .destructive) { _ in
             print("So-so")
         }
         alert.addAction(so)
@@ -140,7 +140,7 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let title = json["title"] as? String {
                     DispatchQueue.main.async {
-                        self.toDoResultLabel.text = "\(NSLocalizedString("todo_title", comment: "To-do title")) \(title)"
+                        self.toDoResultLabel.text = "\("todo_title".localized) \(title)"
                     }
                 }
             } catch {
@@ -166,7 +166,7 @@ final class InfoViewController: UIViewController, UITableViewDataSource {
             do {
                 let planet = try JSONDecoder().decode(Planet.self, from: data)
                 DispatchQueue.main.async {
-                    self.planetResultLabel.text = "\(NSLocalizedString("planet_orbital_period", comment: "Planet orbital period")) \(planet.orbitalPeriod)"
+                    self.planetResultLabel.text = "\("planet_orbital_period".localized) \(planet.orbitalPeriod)"
                 }
             } catch {
                 print("JSONDecoder error: \(error)")

@@ -28,8 +28,8 @@ final class FeedViewController: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 200),
             stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32)
         ])
-        addPostButton(title: NSLocalizedString("post_number_one", comment: "Post number one title"), color: .systemPurple, to: stackView, selector: #selector(tapPostButton))
-        addPostButton(title: NSLocalizedString("post_number_two", comment: "Post number two title"), color: .systemIndigo, to: stackView, selector: #selector(tapPostButton))
+        addPostButton(title: "post_number_one".localized, color: .systemPurple, to: stackView, selector: #selector(tapPostButton))
+        addPostButton(title: "post_number_two".localized, color: .systemIndigo, to: stackView, selector: #selector(tapPostButton))
     }
     
     private func addPostButton(title: String, color: UIColor, to view: UIStackView, selector: Selector) {
