@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */; };
 		CE1768522C6EA78E00A8C845 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */; };
+		CE2E30DA2DB0438400ACB861 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E30D92DB0438400ACB861 /* LocalNotificationsService.swift */; };
 		CE3209A42CB46D3A00FAA3F8 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3209A32CB46D3A00FAA3F8 /* PhotosTableViewCell.swift */; };
 		CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA52CD01F710077C7BA /* ExtensionUIImage.swift */; };
 		CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3A4BA82CD01F710077C7BA /* PhotoExamples.swift */; };
@@ -88,6 +89,7 @@
 /* Begin PBXFileReference section */
 		CE17684F2C6EA77500A8C845 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		CE1768512C6EA78E00A8C845 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CE2E30D92DB0438400ACB861 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		CE3209A32CB46D3A00FAA3F8 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		CE3A4BA52CD01F710077C7BA /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		CE3A4BA62CD01F710077C7BA /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				CE406A6E2DAF0ED800BA2C76 /* LoginError.swift */,
 				CE406A702DAF0F1200BA2C76 /* LoginViewModel.swift */,
 				CE406A722DAF114D00BA2C76 /* PhotosViewModel.swift */,
+				CE2E30D92DB0438400ACB861 /* LocalNotificationsService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				CE7659C62D5E84B700780CEA /* FavoritesViewController.swift in Sources */,
 				CE406A6F2DAF0ED800BA2C76 /* LoginError.swift in Sources */,
 				CE3209A42CB46D3A00FAA3F8 /* PhotosTableViewCell.swift in Sources */,
+				CE2E30DA2DB0438400ACB861 /* LocalNotificationsService.swift in Sources */,
 				CEDE381B2CBAF73A005F32EE /* PhotosCollectionViewCell.swift in Sources */,
 				CEDE38192CBAF271005F32EE /* PhotosViewController.swift in Sources */,
 				CE406A672DAEF82300BA2C76 /* UIColor+Extensions.swift in Sources */,
@@ -455,7 +459,6 @@
 				CEE79ED52D08D5F80048DE2C /* CheckerService.swift in Sources */,
 				CE406A712DAF0F1300BA2C76 /* LoginViewModel.swift in Sources */,
 				CE1768502C6EA77500A8C845 /* ProfileHeaderView.swift in Sources */,
-				CE406A842DAF1C2E00BA2C76 /* UIColor+Extensions.swift in Sources */,
 				CE3A4BAB2CD01F710077C7BA /* ExtensionUIImage.swift in Sources */,
 				CE3A4BAC2CD01F710077C7BA /* PhotoExamples.swift in Sources */,
 				CE3A4BAD2CD01F710077C7BA /* ExtensionUIView.swift in Sources */,

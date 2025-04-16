@@ -8,13 +8,17 @@ import FirebaseCore
 import FirebaseAuth
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     var appConfiguration: AppConfiguration?
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UNUserNotificationCenter.current().delegate = self
+        LocalNotificationsService.shared.registerForLatestUpdatesIfPossible()
+        
         
         appConfiguration = AppConfiguration.allCases.randomElement()
         if let url = appConfiguration?.url {
@@ -59,5 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Error signing out: \(error)")
         }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound, .badge])
     }
 }
