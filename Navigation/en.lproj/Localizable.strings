@@ -46,3 +46,6 @@
 "post_number_two" = "Post number Two";
 
 "check_updates" = "Check updates";
+
+"authentication_failed" = "Authentication failed";
+"biometric_authentication_failed" = "Biometric authentication failed";
