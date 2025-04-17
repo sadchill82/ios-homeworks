@@ -24,6 +24,10 @@ class PhotosViewModelTests: XCTestCase {
         return images
     }()
     
+    override func tearDown() {
+        super.tearDown()
+    }
+    
     // MARK: - Test numberOfPhotos property
     
     func testNumberOfPhotos() {
