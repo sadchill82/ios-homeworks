@@ -34,11 +34,11 @@ final class LoginViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.layer.borderColor = UIColor.lightGray.cgColor
+        stack.layer.borderColor = UIColor.palette.borderColor.cgColor
         stack.layer.borderWidth = 0.5
         stack.layer.cornerRadius = LayoutConstants.cornerRadius
         stack.distribution = .fillProportionally
-        stack.backgroundColor = .systemGray6
+        stack.backgroundColor = .palette.textFieldBackground
         stack.clipsToBounds = true
         return stack
     }()
@@ -47,8 +47,8 @@ final class LoginViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("sign_in".localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitleColor(.palette.buttonTextColor, for: .normal)
+        button.backgroundColor = .palette.buttonBackground
         button.addTarget(nil, action: #selector(signInTapped), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
@@ -59,8 +59,8 @@ final class LoginViewController: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("sign_up".localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
+        button.setTitleColor(.palette.buttonTextColor, for: .normal)
+        button.backgroundColor = .palette.buttonGreenBackground
         button.addTarget(nil, action: #selector(signUpTapped), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
@@ -71,12 +71,12 @@ final class LoginViewController: UIViewController {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.placeholder = "email".localized
-        login.layer.borderColor = UIColor.lightGray.cgColor
+        login.layer.borderColor = UIColor.palette.borderColor.cgColor
         login.layer.borderWidth = 0.25
         login.leftViewMode = .always
         login.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: login.frame.height))
         login.keyboardType = .emailAddress
-        login.textColor = .black
+        login.textColor = .palette.textColor
         login.font = UIFont.systemFont(ofSize: 16)
         login.autocapitalizationType = .none
         login.returnKeyType = .done
@@ -87,12 +87,12 @@ final class LoginViewController: UIViewController {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.placeholder = "password".localized
-        password.layer.borderColor = UIColor.lightGray.cgColor
+        password.layer.borderColor = UIColor.palette.borderColor.cgColor
         password.layer.borderWidth = 0.25
         password.leftViewMode = .always
         password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
         password.isSecureTextEntry = true
-        password.textColor = .black
+        password.textColor = .palette.textColor
         password.font = UIFont.systemFont(ofSize: 16)
         password.autocapitalizationType = .none
         password.returnKeyType = .done
@@ -104,7 +104,7 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .palette.background
         navigationController?.navigationBar.isHidden = true
         
         setupViews()
