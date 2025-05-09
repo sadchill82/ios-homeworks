@@ -44,3 +44,8 @@
 
 "post_number_one" = "Пост номер один";
 "post_number_two" = "Пост номер два";
+
+"check_updates" = "Посмотрите последние обновления";
+
+"authentication_failed" = "Ошибка авторизации";
+"biometric_authentication_failed" = "Ошибка биометрической авторизации";

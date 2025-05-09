@@ -4,10 +4,14 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 final class LoginViewController: UIViewController {
     
     var delegate: LoginViewControllerDelegate?
+    
+    private var loginViewModel: LoginViewModel!
+    private let localAuthService = LocalAuthorizationService.shared
     
     // MARK: Visual content
     
@@ -49,7 +53,6 @@ final class LoginViewController: UIViewController {
         button.setTitle("sign_in".localized, for: .normal)
         button.setTitleColor(.palette.buttonTextColor, for: .normal)
         button.backgroundColor = .palette.buttonBackground
-        button.addTarget(nil, action: #selector(signInTapped), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
         button.clipsToBounds = true
         return button
@@ -61,8 +64,30 @@ final class LoginViewController: UIViewController {
         button.setTitle("sign_up".localized, for: .normal)
         button.setTitleColor(.palette.buttonTextColor, for: .normal)
         button.backgroundColor = .palette.buttonGreenBackground
-        button.addTarget(nil, action: #selector(signUpTapped), for: .touchUpInside)
         button.layer.cornerRadius = LayoutConstants.cornerRadius
+        button.clipsToBounds = true
+        return button
+    }()
+    
+    var biometricAuthButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            if context.biometryType == .faceID {
+                button.setImage(UIImage(systemName: "faceid"), for: .normal)
+            } else {
+                button.setImage(UIImage(systemName: "touchid"), for: .normal)
+            }
+        } else {
+            button.setImage(UIImage(systemName: "person.fill.badge.key"), for: .normal)
+        }
+        
+        button.tintColor = .palette.buttonTextColor
+        button.backgroundColor = .palette.buttonBackground
+        button.layer.cornerRadius = 25
         button.clipsToBounds = true
         return button
     }()
@@ -107,6 +132,12 @@ final class LoginViewController: UIViewController {
         view.backgroundColor = .palette.background
         navigationController?.navigationBar.isHidden = true
         
+        if let delegate = delegate {
+            loginViewModel = LoginViewModel(delegate: delegate)
+        } else {
+            assertionFailure("delegate должен быть задан")
+        }
+        
         setupViews()
     }
     
@@ -114,7 +145,7 @@ final class LoginViewController: UIViewController {
         view.addSubview(loginScrollView)
         loginScrollView.addSubview(contentView)
         
-        contentView.addSubviews(vkLogo, loginStackView, loginButton, signUpButton)
+        contentView.addSubviews(vkLogo, loginStackView, loginButton, signUpButton, biometricAuthButton)
         
         loginStackView.addArrangedSubview(loginField)
         loginStackView.addArrangedSubview(passwordField)
@@ -122,12 +153,15 @@ final class LoginViewController: UIViewController {
         loginField.delegate = self
         passwordField.delegate = self
         
+        loginButton.addTarget(self, action: #selector(signInTapped), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(signUpTapped), for: .touchUpInside)
+        biometricAuthButton.addTarget(self, action: #selector(biometricAuthTapped), for: .touchUpInside)
+        
         setupConstraints()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            
             loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -159,6 +193,13 @@ final class LoginViewController: UIViewController {
             signUpButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutConstants.leadingMargin),
             signUpButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: LayoutConstants.trailingMargin),
             signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Добавляем кнопку для биометрической аутентификации
+            biometricAuthButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: LayoutConstants.indent * 2),
+            biometricAuthButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            biometricAuthButton.widthAnchor.constraint(equalToConstant: 50),
+            biometricAuthButton.heightAnchor.constraint(equalToConstant: 50),
+            biometricAuthButton.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     
@@ -171,7 +212,7 @@ final class LoginViewController: UIViewController {
             return
         }
         
-        delegate?.checkCredentials(email: email, password: password) { [weak self] result in
+        loginViewModel.signIn(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
@@ -190,14 +231,24 @@ final class LoginViewController: UIViewController {
             return
         }
         
-        delegate?.signUp(email: email, password: password) { [weak self] result in
+        loginViewModel.signUp(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     self?.showAlert(title: "success".localized, message: "user_registered_successfully".localized)
                 case .failure(let error):
-                    self?.showAlert(title: "sign_in_failed".localized, message: error.localizedDescription)
+                    self?.showAlert(title: "sign_up_failed".localized, message: error.localizedDescription)
                 }
+            }
+        }
+    }
+    
+    @objc private func biometricAuthTapped() {
+        localAuthService.authorizeIfPossible { [weak self] success in
+            if success {
+                self?.navigateToProfile()
+            } else {
+                self?.showAlert(title: "authentication_failed".localized, message: "biometric_authentication_failed".localized)
             }
         }
     }
@@ -220,7 +271,6 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     
-    // Tap 'done' on the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

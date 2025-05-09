@@ -4,7 +4,9 @@ class PhotosViewController: UIViewController {
     
     let photoIdent = "photoCell"
     
-    // MARK: - Visual objects
+    private var viewModel: PhotosViewModel!
+    
+    // MARK: Visual objects
     
     lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -18,7 +20,7 @@ class PhotosViewController: UIViewController {
     lazy var photosCollectionView: UICollectionView = {
         let photos = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photos.translatesAutoresizingMaskIntoConstraints = false
-        photos.backgroundColor = .palette.background
+        photos.backgroundColor = .white
         photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photoIdent)
         return photos
     }()
@@ -27,12 +29,14 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "photo_gallery".localized
-        self.view.backgroundColor = .palette.background
+        
+        viewModel = PhotosViewModel()
+        
         self.view.addSubview(photosCollectionView)
-        self.photosCollectionView.dataSource = self
-        self.photosCollectionView.delegate = self
+        photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
+        
         setupConstraints()
     }
     
@@ -56,33 +60,33 @@ class PhotosViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
+// MARK: - UICollectionViewDataSource
+
+extension PhotosViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.numberOfPhotos
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell,
+              let photo = viewModel.photo(at: indexPath.item) else {
+            return UICollectionViewCell()
+        }
+        cell.configCellCollection(photo: photo)
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let countItem: CGFloat = 2
         let accessibleWidth = collectionView.frame.width - 32
         let widthItem = (accessibleWidth / countItem)
         return CGSize(width: widthItem, height: widthItem * 0.56)
-    }
-}
-
-extension PhotosViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        return Photos.shared.examples.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoIdent, for: indexPath) as? PhotosCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.configCellCollection(photo: Photos.shared.examples[indexPath.item])
-        return cell
     }
 }
